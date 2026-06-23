@@ -40,12 +40,12 @@ public class ChooseCharacter : MonoBehaviour
         //remove old character
         if (prevIndex < 0) { prevIndex = characters.Length-1; }
         else if (prevIndex == characters.Length) { prevIndex = 0; }
-        characters[prevIndex].GetComponent<Transform>().localScale = new Vector2(1, 1);
+        characters[prevIndex].GetComponent<Transform>().localScale = new Vector2(.15f, .15f);
 
         //set new character
         if (charIndex < 0) { charIndex = characters.Length - 1; }
         else if (charIndex == characters.Length) { charIndex = 0; }
-        characters[charIndex].GetComponent<Transform>().localScale = new Vector2(1.5f, 1.5f);
+        characters[charIndex].GetComponent<Transform>().localScale = new Vector2(.25f, .25f);
         
         cs = characters[charIndex].GetComponent<CharStats>();
         str = "{ " + cs.charName + " }\n"
