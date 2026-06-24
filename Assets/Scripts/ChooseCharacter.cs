@@ -9,29 +9,104 @@ public class ChooseCharacter : MonoBehaviour
     public GameObject[] characters;
     private int charIndex;
     CharStats cs;
-    public TextMeshProUGUI textbox;
     string str;
+    private int playerChoosing; //which player is currently selecting
+    //character the player has chosen
+    private GameObject p1Selection = null;
+    private GameObject p2Selection = null;
+    //on finalize screen, whether player has locked in choice
+    private bool p1Ready = false;
+    private bool p2Ready = false;
+    //positions of objects on screen
+    private Vector2 p1CharPos = new Vector2(-4.5f, -.4f);
+    private Vector2 p2CharPos = new Vector2(5f, -.4f);
+    private Vector2 p1TextPos = new Vector2(415f, 8f);
+    private Vector2 p2TextPos = new Vector2(-545f, 8f);
+    //text boxes
+    public TextMeshProUGUI flexTextbox;
+    public TextMeshProUGUI leftTextbox;
+    public TextMeshProUGUI rightTextbox;
+    public TextMeshProUGUI leftCtrlTextbox;
+    public TextMeshProUGUI rightCtrlTextbox;
 
     // Start is called before the first frame update
     void Start()
     {
         charIndex = 0;
-        textbox = gameObject.GetComponent<TextMeshProUGUI>();
-        UpdateSelectedChar(8);
+        P1Select();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (playerChoosing == 1)    //P1 selecting
         {
-            charIndex++;
-            UpdateSelectedChar(charIndex-1);
+            //choose current character
+            if (Input.GetKeyDown(KeyCode.E)) {
+                p1Selection = characters[charIndex];
+                if (p2Selection == null) { P2Select(); }
+                else { FinalizeSelections(); }
+            }
+            //browse characters
+            else if (Input.GetKeyDown(KeyCode.A))
+            {
+                charIndex++;
+                UpdateSelectedChar(charIndex - 1);
+            }
+            else if (Input.GetKeyDown(KeyCode.D))
+            {
+                charIndex--;
+                UpdateSelectedChar(charIndex + 1);
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if (playerChoosing == 2)   //P2 selecting
         {
-            charIndex--;
-            UpdateSelectedChar(charIndex+1);
+            //choose current character
+            if (Input.GetKeyDown(KeyCode.Return)) {
+                p2Selection = characters[charIndex];
+                if (p1Selection == null) { P1Select(); }
+                else { FinalizeSelections(); }
+            }
+            //browse characters
+            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                charIndex++;
+                UpdateSelectedChar(charIndex - 1);
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                charIndex--;
+                UpdateSelectedChar(charIndex + 1);
+            }
+        }
+        else if (playerChoosing == 3)   //finalize screen
+        {
+            //Lock in P1 selection
+            if (Input.GetKeyDown(KeyCode.E)) { p1Ready = true; }
+            if (Input.GetKeyDown(KeyCode.Return)) { p2Ready = true; }
+            if (p1Ready && p2Ready)
+            {
+                //placeholder - scene transition to arena
+                p1Selection.SetActive(false);
+                p2Selection.SetActive(false);
+                leftTextbox.text = "";
+                rightTextbox.text = "";
+                leftCtrlTextbox.text = "";
+                rightCtrlTextbox.text = "";
+            }
+            else if (p1Ready) { leftCtrlTextbox.text = "READY"; }
+            else if (p2Ready) { rightCtrlTextbox.text = "READY"; }
+
+            //P1 changes mind
+            if (p1Ready == false && Input.GetKeyDown(KeyCode.Q))
+            {
+                P1Select();
+            }
+            //P2 changes mind
+            else if (p2Ready == false && Input.GetKeyDown(KeyCode.RightShift))
+            {
+                P2Select();
+            }
         }
     }
 
@@ -40,12 +115,12 @@ public class ChooseCharacter : MonoBehaviour
         //remove old character
         if (prevIndex < 0) { prevIndex = characters.Length-1; }
         else if (prevIndex == characters.Length) { prevIndex = 0; }
-        characters[prevIndex].GetComponent<Transform>().localScale = new Vector2(.15f, .15f);
+        characters[prevIndex].SetActive(false);
 
         //set new character
         if (charIndex < 0) { charIndex = characters.Length - 1; }
         else if (charIndex == characters.Length) { charIndex = 0; }
-        characters[charIndex].GetComponent<Transform>().localScale = new Vector2(.25f, .25f);
+        characters[charIndex].SetActive(true);
         
         cs = characters[charIndex].GetComponent<CharStats>();
         str = "{ " + cs.charName + " }\n"
@@ -56,6 +131,73 @@ public class ChooseCharacter : MonoBehaviour
             + "special - " + cs.special + ": " + cs.specialDesc + "\n"
             + "defensive - " + cs.defensive + ": " + cs.defensiveDesc + "\n"
             + cs.blurb;
-        textbox.text = str;
+
+        //update textboxes
+        flexTextbox.text = str;
+        if (playerChoosing == 1) { leftTextbox.text = "P1: " + cs.charName; }
+        else if (playerChoosing == 2) { rightTextbox.text = "P2: " + cs.charName; }
+    }
+
+    void P1Select()
+    {
+        p1Selection = null;
+        playerChoosing = 1;
+
+        //update textboxes
+        flexTextbox.transform.localPosition = p1TextPos;
+        rightTextbox.text = "";
+        rightCtrlTextbox.text = "";
+        leftCtrlTextbox.text = "[A] and [D] browse\n[E] select";
+
+        //hide all chars but the first one selected and place in the P1 position
+        foreach (GameObject g in characters)
+        {
+            g.SetActive(false);
+            g.transform.parent.gameObject.transform.position = p1CharPos;
+        }
+        charIndex = 8;
+        UpdateSelectedChar(charIndex);
+    }
+
+    void P2Select()
+    {
+        p2Selection = null;
+        playerChoosing = 2;
+
+        //update textboxes
+        flexTextbox.transform.localPosition = p2TextPos;
+        leftTextbox.text = "";
+        leftCtrlTextbox.text = "";
+        rightCtrlTextbox.text = "[<-] and [->] browse\n[RETURN] select";
+
+        //hide all chars but the first one selected and place in the P2 position
+        foreach (GameObject g in characters)
+        {
+            g.SetActive(false);
+            g.transform.parent.gameObject.transform.position = p2CharPos;
+        }
+        charIndex = 8;
+        UpdateSelectedChar(charIndex);
+
+    }
+
+    void FinalizeSelections()
+    {
+        playerChoosing = 3;
+        p1Ready = false;
+        p2Ready = false;
+
+        //update textboxes
+        flexTextbox.text = "";
+        leftTextbox.text = "P1: " + p1Selection.GetComponent<CharStats>().charName;
+        rightTextbox.text = "P2: " + p2Selection.GetComponent<CharStats>().charName;
+        leftCtrlTextbox.text = "[Q] change\n[E] finalize";
+        rightCtrlTextbox.text = "[SHIFT] change\n[RETURN] ready";
+
+        //show both characters
+        p1Selection.transform.parent.gameObject.transform.position = p1CharPos;
+        p1Selection.SetActive(true);
+        p2Selection.transform.parent.gameObject.transform.position = p2CharPos;
+        p2Selection.SetActive(true);
     }
 }
