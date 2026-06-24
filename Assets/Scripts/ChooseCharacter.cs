@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ChooseCharacter : MonoBehaviour
 {
-    public GameObject[] characters;
+    public GameObject[] characters; //fix later: can't display two of same character
     private int charIndex;
     CharStats cs;
     string str;
