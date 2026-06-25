@@ -1,19 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ChooseCharacter : MonoBehaviour
 {
+    public GameObject[] prefabs;
     public GameObject[] characters; //fix later: can't display two of same character
     private int charIndex;
     CharStats cs;
     string str;
     private int playerChoosing; //which player is currently selecting
     //character the player has chosen
-    private GameObject p1Selection = null;
-    private GameObject p2Selection = null;
+    private int p1Selection = -1;
+    private int p2Selection = -1;
     //on finalize screen, whether player has locked in choice
     private bool p1Ready = false;
     private bool p2Ready = false;
@@ -30,8 +33,9 @@ public class ChooseCharacter : MonoBehaviour
     public TextMeshProUGUI rightCtrlTextbox;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
+        StaticData.prefabs = prefabs;
         charIndex = 0;
         P1Select();
     }
@@ -43,8 +47,8 @@ public class ChooseCharacter : MonoBehaviour
         {
             //choose current character
             if (Input.GetKeyDown(KeyCode.E)) {
-                p1Selection = characters[charIndex];
-                if (p2Selection == null) { P2Select(); }
+                p1Selection = charIndex;
+                if (p2Selection == -1) { P2Select(); }
                 else { FinalizeSelections(); }
             }
             //browse characters
@@ -63,8 +67,8 @@ public class ChooseCharacter : MonoBehaviour
         {
             //choose current character
             if (Input.GetKeyDown(KeyCode.Return)) {
-                p2Selection = characters[charIndex];
-                if (p1Selection == null) { P1Select(); }
+                p2Selection = charIndex;
+                if (p1Selection == -1) { P1Select(); }
                 else { FinalizeSelections(); }
             }
             //browse characters
@@ -86,13 +90,10 @@ public class ChooseCharacter : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Return)) { p2Ready = true; }
             if (p1Ready && p2Ready)
             {
-                //placeholder - scene transition to arena
-                p1Selection.SetActive(false);
-                p2Selection.SetActive(false);
-                leftTextbox.text = "";
-                rightTextbox.text = "";
-                leftCtrlTextbox.text = "";
-                rightCtrlTextbox.text = "";
+                //transition to arena scene
+                StaticData.P1Selection = (CharPrefab)p1Selection;
+                StaticData.P2Selection = (CharPrefab)p2Selection;
+                SceneManager.LoadScene("Arena");
             }
             else if (p1Ready) { leftCtrlTextbox.text = "READY"; }
             else if (p2Ready) { rightCtrlTextbox.text = "READY"; }
@@ -140,7 +141,7 @@ public class ChooseCharacter : MonoBehaviour
 
     void P1Select()
     {
-        p1Selection = null;
+        p1Selection = -1;
         playerChoosing = 1;
 
         //update textboxes
@@ -161,7 +162,7 @@ public class ChooseCharacter : MonoBehaviour
 
     void P2Select()
     {
-        p2Selection = null;
+        p2Selection = -1;
         playerChoosing = 2;
 
         //update textboxes
@@ -189,15 +190,15 @@ public class ChooseCharacter : MonoBehaviour
 
         //update textboxes
         flexTextbox.text = "";
-        leftTextbox.text = "P1: " + p1Selection.GetComponent<CharStats>().charName;
-        rightTextbox.text = "P2: " + p2Selection.GetComponent<CharStats>().charName;
+        leftTextbox.text = "P1: " + characters[p1Selection].GetComponent<CharStats>().charName;
+        rightTextbox.text = "P2: " + characters[p2Selection].GetComponent<CharStats>().charName;
         leftCtrlTextbox.text = "[Q] change\n[E] finalize";
         rightCtrlTextbox.text = "[SHIFT] change\n[RETURN] ready";
 
         //show both characters
-        p1Selection.transform.parent.gameObject.transform.position = p1CharPos;
-        p1Selection.SetActive(true);
-        p2Selection.transform.parent.gameObject.transform.position = p2CharPos;
-        p2Selection.SetActive(true);
+        characters[p1Selection].transform.parent.gameObject.transform.position = p1CharPos;
+        characters[p1Selection].SetActive(true);
+        characters[p2Selection].transform.parent.gameObject.transform.position = p2CharPos;
+        characters[p2Selection].SetActive(true);
     }
 }

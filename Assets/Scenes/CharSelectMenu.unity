@@ -151,6 +151,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7456056e3106cd045bbe133a8a73f1a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 2683128548010435435, guid: dc194ee13e3d75647a18977063a13b9c, type: 3}
+  - {fileID: 2683128548010435435, guid: e71819e937c140f41b6cf0954913a1ec, type: 3}
+  - {fileID: 2683128548010435435, guid: ec76daedb42248c47a0881d73545d0e2, type: 3}
+  - {fileID: 2683128548010435435, guid: a7c663acfe3ba7c4ab5d1ba6c01ed6b9, type: 3}
+  - {fileID: 2683128548010435435, guid: c1ae1f320b080ad439c6a4b429aa7f52, type: 3}
+  - {fileID: 2683128548010435435, guid: bcd6a9f95cafaab42874254f44da8e7e, type: 3}
+  - {fileID: 2683128548010435435, guid: f5221e028a93c114a868fb603d80e0a9, type: 3}
+  - {fileID: 2683128548010435435, guid: bb0f83c01a3c5f241a33e0500f73dc82, type: 3}
+  - {fileID: 2683128548010435435, guid: 93b4bd7157464ce48a6fcbf6c2653782, type: 3}
   characters:
   - {fileID: 614044728}
   - {fileID: 959325030}
@@ -248,6 +258,10 @@ PrefabInstance:
     - target: {fileID: 2683128548010435435, guid: dc194ee13e3d75647a18977063a13b9c, type: 3}
       propertyPath: m_Name
       value: Ashfall
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683128548010435435, guid: dc194ee13e3d75647a18977063a13b9c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4148002499235694564, guid: dc194ee13e3d75647a18977063a13b9c, type: 3}
       propertyPath: m_MaskInteraction
