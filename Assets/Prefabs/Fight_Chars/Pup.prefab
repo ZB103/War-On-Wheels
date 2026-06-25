@@ -206,6 +206,7 @@ MonoBehaviour:
   charName: Pup
   disability: Fetal Alchohol Syndrome Disorder
   blurb: '"Don''t let the name fool you. I''m vicious."'
+  canJump: 0
   maxHP: 80
   currHP: 0
   dam: 5

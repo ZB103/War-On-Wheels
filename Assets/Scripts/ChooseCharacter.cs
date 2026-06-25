@@ -85,9 +85,11 @@ public class ChooseCharacter : MonoBehaviour
         }
         else if (playerChoosing == 3)   //finalize screen
         {
-            //Lock in P1 selection
+            //Lock in selection
             if (Input.GetKeyDown(KeyCode.E)) { p1Ready = true; }
             if (Input.GetKeyDown(KeyCode.Return)) { p2Ready = true; }
+            if (p1Ready) { leftCtrlTextbox.text = "READY"; }
+            if (p2Ready) { rightCtrlTextbox.text = "READY"; }
             if (p1Ready && p2Ready)
             {
                 //transition to arena scene
@@ -95,8 +97,6 @@ public class ChooseCharacter : MonoBehaviour
                 StaticData.P2Selection = (CharPrefab)p2Selection;
                 SceneManager.LoadScene("Arena");
             }
-            else if (p1Ready) { leftCtrlTextbox.text = "READY"; }
-            else if (p2Ready) { rightCtrlTextbox.text = "READY"; }
 
             //P1 changes mind
             if (p1Ready == false && Input.GetKeyDown(KeyCode.Q))

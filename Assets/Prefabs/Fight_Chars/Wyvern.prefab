@@ -206,6 +206,7 @@ MonoBehaviour:
   charName: Wyvern
   disability: Functional Neurological Disorder
   blurb: 
+  canJump: 0
   maxHP: 50
   currHP: 0
   dam: 7

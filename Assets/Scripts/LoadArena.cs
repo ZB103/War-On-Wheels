@@ -8,8 +8,10 @@ using UnityEngine.UI;
 public class LoadArena : MonoBehaviour
 {
     //character the player has chosen
-    private GameObject p1Selection;
-    private GameObject p2Selection;
+    private GameObject p1Selection; //parent
+    private GameObject p2Selection; //parent
+    private GameObject p1Char;      //child (sprite)
+    private GameObject p2Char;      //child (sprite)
     //positions of objects on screen
     private Vector2 p1CharPos = new Vector2(-5f, -2.25f);
     private Vector2 p2CharPos = new Vector2(5f, -2.25f);
@@ -30,6 +32,10 @@ public class LoadArena : MonoBehaviour
         p2Selection = (GameObject)Instantiate(StaticData.prefabs[(int)StaticData.P2Selection], p2CharPos, new Quaternion(0, 0, 0, 0));
         p1Selection.transform.localScale = new Vector2(0.4f, 0.4f);
         p2Selection.transform.localScale = new Vector2(0.4f, 0.4f);
+        p1Char = p1Selection.transform.GetChild(0).gameObject;
+        p2Char = p2Selection.transform.GetChild(0).gameObject;
+        p1Char.AddComponent<P1Controls>();
+        p2Char.AddComponent<P2Controls>();
     }
 
     // Update is called once per frame

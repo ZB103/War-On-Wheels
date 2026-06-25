@@ -206,6 +206,7 @@ MonoBehaviour:
   charName: Ashfall
   disability: Cerebral Palsy
   blurb: '"Only a coward would avoid fighting me~"'
+  canJump: 0
   maxHP: 100
   currHP: 0
   dam: 10
