@@ -8,7 +8,7 @@ public class CharStats : MonoBehaviour
     public string charName;
     public string disability;
     public string blurb;
-    public bool canJump = true;
+    public bool canJump;
     //stats
     public int maxHP;
     public int currHP;

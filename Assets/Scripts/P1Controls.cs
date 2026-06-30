@@ -26,21 +26,21 @@ public class P1Controls : MonoBehaviour
     public GameObject ground;
 
     // Start is called before the first frame update
-    void Awake()
+    void OnEnable()
     {
         rb = GetComponent<Rigidbody2D>();
         pCollider = GetComponent<BoxCollider2D>();
         cs = GetComponent<CharStats>();
-        moveSpeed = 5 * (cs.speed/10);  //get speed multiplier from stats
+        moveSpeed = cs.speed;  //get speed multiplier from stats
         acc = 2.5f;
         dec = 3.5f;
-        jumpForce = 25;
+        jumpForce = 2 * cs.speed;
         Physics2D.gravity = new Vector2(0, -70f);
         movementOn = true;
-        maxJumpBufferTime = .75f;
+        maxJumpBufferTime = .5f;
         jumpBufferTimer = 0f;
         jumpStart = false;
-        descentMultiplier = 0.1f;
+        descentMultiplier = 0.3f;
         right = false;
         left = false;
         jumpQueued = false;
@@ -117,29 +117,26 @@ public class P1Controls : MonoBehaviour
         }
 
         //execute jump if within jump buffer
-        if (cs.canJump)
+        if (jumpQueued)
         {
-            if (jumpQueued)
-            {
-                jumpQueued = false;
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            }
+            jumpQueued = false;
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        }
 
-            //reduced gravity at top of jump (apex float)
-            if (!IsGrounded() && Mathf.Abs(rb.velocity.y) <= 0.5f)
-            {
-                rb.gravityScale = 0.3f;
-            }
-            else if (!IsGrounded())
-            {
-                rb.gravityScale = 1f;
-            }
+        //reduced gravity at top of jump (apex float)
+        if (!IsGrounded() && Mathf.Abs(rb.velocity.y) <= 0.5f)
+        {
+            rb.gravityScale = 0.3f;
+        }
+        else if (!IsGrounded())
+        {
+            rb.gravityScale = 1f;
+        }
 
-            //fall quickly
-            if (rb.velocity.y < -1f)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y - descentMultiplier);
-            }
+        //fall quickly
+        if (rb.velocity.y < -1f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y - descentMultiplier);
         }
     }
 
@@ -157,6 +154,11 @@ public class P1Controls : MonoBehaviour
 
     //change move/jump stats based on stress levels
     public void UpdateStats()
+    {
+        
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         
     }

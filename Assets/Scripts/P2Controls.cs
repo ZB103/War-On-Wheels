@@ -10,44 +10,40 @@ public class P2Controls : MonoBehaviour
 {
     private Rigidbody2D rb;
     public BoxCollider2D pCollider;
-    public float maxMoveSpeed; //horizontal movement max speed
+    private CharStats cs;
     public float moveSpeed; //horizontal movement
     private float acc;  //horizontal acceleration
     private float dec;  //horizontal deceleration
-    private float maxJumpForce; //vertical movement max force
     private float jumpForce; //vertical movement
     public bool movementOn; //player can move?
-    private float maxCoyoteTime;    //jump allowed for extra time after leaving platform
-    public float coyoteTimer;   //timer used to determine whether jump is allowed at that moment
     private float maxJumpBufferTime;    //jump is allowed before hitting the ground
     public float jumpBufferTimer;      //timer used to determine whether jump allowed at that moment
     public bool jumpStart;      //used to trigger jump animation
     private float descentMultiplier;  //amount of velocity adjustment when falling
     private bool right;
     private bool left;
-    private bool jump;
-    [SerializeField] private LayerMask jumpableGround;  //layer of ground able to be jumped from
+    private bool jumpQueued;
+    public GameObject ground;
 
     // Start is called before the first frame update
-    void Awake()
+    void OnEnable()
     {
         rb = GetComponent<Rigidbody2D>();
         pCollider = GetComponent<BoxCollider2D>();
-        maxMoveSpeed = 5;
-        moveSpeed = maxMoveSpeed;
-        acc = 2f;
-        dec = 2.5f;
-        maxJumpForce = 16;
-        jumpForce = maxJumpForce;
+        cs = GetComponent<CharStats>();
+        moveSpeed = cs.speed;  //get speed multiplier from stats
+        acc = 2.5f;
+        dec = 3.5f;
+        jumpForce = 2 * cs.speed;
         Physics2D.gravity = new Vector2(0, -70f);
         movementOn = true;
-        maxCoyoteTime = 0.15f;
-        maxJumpBufferTime = 0.5f;
+        maxJumpBufferTime = .5f;
+        jumpBufferTimer = 0f;
         jumpStart = false;
-        descentMultiplier = 0.1f;
+        descentMultiplier = 0.3f;
         right = false;
         left = false;
-        jump = false;
+        jumpQueued = false;
     }
 
     private void Update()
@@ -56,24 +52,19 @@ public class P2Controls : MonoBehaviour
         if (movementOn)
         {
             //right movement
-            if (Input.GetKey(KeyCode.D) && rb.velocity.x < moveSpeed) { right = true; }
+            if (Input.GetKey(KeyCode.RightArrow) && rb.velocity.x < moveSpeed) { right = true; }
             else { right = false; }
             //left movement
-            if (Input.GetKey(KeyCode.A) && rb.velocity.x > -moveSpeed) { left = true; }
+            if (Input.GetKey(KeyCode.LeftArrow) && rb.velocity.x > -moveSpeed) { left = true; }
             else { left = false; }
 
-            //coyote buffer countdown
-            if (IsGrounded()) { coyoteTimer = maxCoyoteTime; }
-            else { coyoteTimer -= Time.deltaTime; }
-
             //jump buffer countdown
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))
-            { jumpBufferTimer = maxJumpBufferTime; }
-            else { jumpBufferTimer -= Time.deltaTime; }
-            
-            //jump
-            if (jumpBufferTimer > 0f && coyoteTimer > 0f ) { jumpStart = true; jump = true; }
-            if (Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.W)) { coyoteTimer = 0f; }
+            if (cs.canJump)
+            {
+                if (Input.GetKeyDown(KeyCode.UpArrow) && jumpBufferTimer <= 0f)
+                { jumpBufferTimer = maxJumpBufferTime; jumpQueued = true; jumpStart = true; }
+                jumpBufferTimer -= Time.deltaTime;
+            }
         }
     }
 
@@ -125,16 +116,15 @@ public class P2Controls : MonoBehaviour
             }
         }
 
-        //execute jump if within jump buffer and coyote allowance
-        if (jump)
+        //execute jump if within jump buffer
+        if (jumpQueued)
         {
-            jump = false;
+            jumpQueued = false;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            jumpBufferTimer = 0f;
         }
 
         //reduced gravity at top of jump (apex float)
-        if (!IsGrounded() && Mathf.Abs(rb.velocity.y)<= 0.5f)
+        if (!IsGrounded() && Mathf.Abs(rb.velocity.y) <= 0.5f)
         {
             rb.gravityScale = 0.3f;
         }
@@ -153,17 +143,22 @@ public class P2Controls : MonoBehaviour
     //determines whether the player is touching the ground
     public bool IsGrounded()
     {
-        return Physics2D.BoxCast(pCollider.bounds.center, pCollider.bounds.size, 0f, Vector2.down, 0.5f, jumpableGround);
+        return Physics2D.BoxCast(pCollider.bounds.center, pCollider.bounds.size, 0f, Vector2.down, 0.5f);
     }
 
     //determines whether the player is just above the ground, for purposes of queueing a jump
     public bool IsAlmostGrounded()
     {
-        return Physics2D.BoxCast(pCollider.bounds.center, pCollider.bounds.size, 0f, Vector2.down, 0.85f, jumpableGround);
+        return Physics2D.BoxCast(pCollider.bounds.center, pCollider.bounds.size, 0f, Vector2.down, 0.85f);
     }
 
     //change move/jump stats based on stress levels
     public void UpdateStats()
+    {
+
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         
     }
