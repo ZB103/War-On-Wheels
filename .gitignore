@@ -76,7 +76,13 @@ crashlytics-build.properties
 
 # Art files
 *.clip
+*.ase
+*.aseprite
+*.pcx
+*.ico
+*.tga
 **/[Cc]lip[Ff]iles
+**/[Ll][Bb][Ff]iles
 
 # Audio files
 *.aup3
