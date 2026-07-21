@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 7389784734963636812}
   - component: {fileID: 2747127309621936856}
   - component: {fileID: 3660417443558360229}
+  - component: {fileID: 217975600812126391}
   m_Layer: 3
   m_Name: Sprite-Jun
   m_TagString: Untagged
@@ -263,3 +264,24 @@ MonoBehaviour:
   specialDesc: Tap shockwaves through the ground
   defensive: Style With Function
   defensiveDesc: Put on stylish sunglasses to reduce damage
+--- !u!95 &217975600812126391
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8790242206735934840}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 305cabf355c258548bb50f483384a326, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
