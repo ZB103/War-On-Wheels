@@ -33,7 +33,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Def Move
+  m_Name: Def_Move
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -111,7 +111,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Std Attack
+  m_Name: Std_Attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -185,7 +185,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Spc Attack
+  m_Name: Spc_Attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -270,28 +270,28 @@ AnimatorStateMachine:
     m_Position: {x: 155.96155, y: 263.07697, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7179400004504207940}
-    m_Position: {x: 425.78403, y: 277.1302, z: 0}
+    m_Position: {x: 450, y: -100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7997211162597046837}
-    m_Position: {x: 435.78403, y: 287.1302, z: 0}
+    m_Position: {x: 440, y: -40, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2370019208140058126}
-    m_Position: {x: 445.78403, y: 297.1302, z: 0}
+    m_Position: {x: 450, y: 30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2656055843814113955}
-    m_Position: {x: 705.1627, y: 243.96454, z: 0}
+    m_Position: {x: 470, y: 80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7535859293370044744}
-    m_Position: {x: 715.1627, y: 253.96454, z: 0}
+    m_Position: {x: 480, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5934654181783702660}
-    m_Position: {x: 725.1627, y: 263.96454, z: 0}
+    m_Position: {x: 480, y: 180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -406945280010926906}
-    m_Position: {x: 735.1627, y: 273.96454, z: 0}
+    m_Position: {x: 470, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7612130027929324435}
-    m_Position: {x: 745.1627, y: 283.96454, z: 0}
+    m_Position: {x: 470, y: 300, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

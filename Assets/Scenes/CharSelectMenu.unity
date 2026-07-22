@@ -267,18 +267,6 @@ PrefabInstance:
       propertyPath: m_MaskInteraction
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6019751267134890306, guid: dc194ee13e3d75647a18977063a13b9c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6019751267134890306, guid: dc194ee13e3d75647a18977063a13b9c, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6019751267134890306, guid: dc194ee13e3d75647a18977063a13b9c, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4153368418836963661, guid: dc194ee13e3d75647a18977063a13b9c, type: 3}
     m_RemovedGameObjects: []

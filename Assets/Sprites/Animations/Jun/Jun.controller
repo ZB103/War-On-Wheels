@@ -14,28 +14,28 @@ AnimatorStateMachine:
     m_Position: {x: 117.736694, y: 258.01776, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7457248799482182273}
-    m_Position: {x: 519.6598, y: 184.94086, z: 0}
+    m_Position: {x: 440, y: -90, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8613596054166888492}
-    m_Position: {x: 529.6598, y: 194.94086, z: 0}
+    m_Position: {x: 440, y: -20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6389668968518289464}
-    m_Position: {x: 539.6598, y: 204.94086, z: 0}
+    m_Position: {x: 440, y: 40, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3968039024378306487}
-    m_Position: {x: 549.6598, y: 214.94086, z: 0}
+    m_Position: {x: 450, y: 90, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6742361305428880638}
-    m_Position: {x: 559.6598, y: 224.94086, z: 0}
+    m_Position: {x: 460, y: 140, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4282469937101325119}
-    m_Position: {x: 569.6598, y: 234.94086, z: 0}
+    m_Position: {x: 460, y: 190, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5335569727436411350}
-    m_Position: {x: 579.6598, y: 244.94086, z: 0}
+    m_Position: {x: 460, y: 310, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1822139412423721231}
-    m_Position: {x: 589.6598, y: 254.94086, z: 0}
+    m_Position: {x: 460, y: 250, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -127,7 +127,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Spc Attack
+  m_Name: Spc_Attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -153,7 +153,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Std Attack
+  m_Name: Std_Attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -283,7 +283,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Def Move
+  m_Name: Def_Move
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

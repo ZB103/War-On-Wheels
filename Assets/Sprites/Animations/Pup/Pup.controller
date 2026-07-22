@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Def Move
+  m_Name: Def_Move
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -59,7 +59,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Std Attack
+  m_Name: Std_Attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -114,25 +114,25 @@ AnimatorStateMachine:
     m_Position: {x: 164.3935, y: 227.10062, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8007142273796557547}
-    m_Position: {x: 481.99704, y: 182.69235, z: 0}
+    m_Position: {x: 440, y: -50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5643783602323599669}
-    m_Position: {x: 491.99704, y: 192.69235, z: 0}
+    m_Position: {x: 450, y: 10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9195486474533666764}
-    m_Position: {x: 501.99704, y: 202.69235, z: 0}
+    m_Position: {x: 460, y: 70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2185744810905836839}
-    m_Position: {x: 511.99704, y: 212.69235, z: 0}
+    m_Position: {x: 460, y: 130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1299271453951631969}
-    m_Position: {x: 805.78406, y: 294.5562, z: 0}
+    m_Position: {x: 440, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -136227419014158892}
-    m_Position: {x: 815.78406, y: 304.5562, z: 0}
+    m_Position: {x: 460, y: 270, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1785280777179267495}
-    m_Position: {x: 825.78406, y: 314.5562, z: 0}
+    m_Position: {x: 420, y: 340, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -150,7 +150,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Spc Attack
+  m_Name: Spc_Attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
