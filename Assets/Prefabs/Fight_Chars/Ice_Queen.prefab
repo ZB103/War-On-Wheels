@@ -254,8 +254,10 @@ MonoBehaviour:
   disability: Postural Orthostatic Tachycardia Syndrome
   blurb: 
   canJump: 1
-  maxHP: 70
-  currHP: 0
+  maxHealth: 70
+  health: 0
+  maxCooldown: 0
+  cooldown: 0
   dam: 6
   speed: 6
   primary: Don't Slip!

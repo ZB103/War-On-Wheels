@@ -10,8 +10,10 @@ public class CharStats : MonoBehaviour
     public string blurb;
     public bool canJump;
     //stats
-    public int maxHP;
-    public int currHP;
+    public int maxHealth;
+    public int health;      //defeat when health reaches 0
+    public int maxCooldown;
+    public int cooldown;    //special attack can be used when cooldown reaches 0
     public int dam;
     public int speed;
     //primary attack
@@ -25,9 +27,10 @@ public class CharStats : MonoBehaviour
     public string defensiveDesc;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
-        currHP = maxHP;
+        health = maxHealth;
+        cooldown = maxCooldown;
     }
 
     // Update is called once per frame

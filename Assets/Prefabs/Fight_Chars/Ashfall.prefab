@@ -254,8 +254,10 @@ MonoBehaviour:
   disability: Cerebral Palsy
   blurb: '"Only a coward would avoid fighting me~"'
   canJump: 0
-  maxHP: 100
-  currHP: 0
+  maxHealth: 100
+  health: 0
+  maxCooldown: 0
+  cooldown: 0
   dam: 10
   speed: 2
   primary: "Nol\xE9!"

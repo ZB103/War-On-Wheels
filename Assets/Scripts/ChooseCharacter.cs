@@ -125,7 +125,7 @@ public class ChooseCharacter : MonoBehaviour
         
         cs = characters[charIndex].GetComponent<CharStats>();
         str = "{ " + cs.charName + " }\n"
-            + "maxHP - " + cs.maxHP + "\n"
+            + "maxHP - " + cs.maxHealth + "\n"
             + "dam - " + cs.dam + "\n"
             + "speed - " + cs.speed + "\n"
             + "primary - " + cs.primary + ": " + cs.primaryDesc + "\n"

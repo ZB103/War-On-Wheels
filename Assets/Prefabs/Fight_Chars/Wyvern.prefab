@@ -252,10 +252,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charName: Wyvern
   disability: Functional Neurological Disorder
-  blurb: 
+  blurb: '"Vroom"'
   canJump: 0
-  maxHP: 50
-  currHP: 0
+  maxHealth: 50
+  health: 0
+  maxCooldown: 0
+  cooldown: 0
   dam: 7
   speed: 5
   primary: Four On The Floor!

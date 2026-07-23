@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -25,8 +26,9 @@ public class LoadArena : MonoBehaviour
     public TextMeshProUGUI rightCtrlTextbox;
 
     // Start is called before the first frame update
-    void OnEnable()
+    void Awake()
     {
+
         //add selected characters to scene
         p1Selection = (GameObject)Instantiate(StaticData.prefabs[(int)StaticData.P1Selection], p1CharPos, new Quaternion(0, 0, 0, 0));
         p2Selection = (GameObject)Instantiate(StaticData.prefabs[(int)StaticData.P2Selection], p2CharPos, new Quaternion(0, 0, 0, 0));
@@ -34,12 +36,20 @@ public class LoadArena : MonoBehaviour
         p2Selection.transform.localScale = new Vector2(.5f, .5f);
         p1Char = p1Selection.transform.GetChild(0).gameObject;
         p2Char = p2Selection.transform.GetChild(0).gameObject;
+
+        //add controls
         p1Char.AddComponent<P1Controls>();
         p2Char.AddComponent<P2Controls>();
+
+        //add animations
         p1Char.AddComponent<PlayerAnims>();
         p1Char.GetComponent<PlayerAnims>().flipAnims = false;
         p2Char.AddComponent<PlayerAnims>();
         p2Char.GetComponent<PlayerAnims>().flipAnims = true;
+
+        //configure UI
+        HealthBarUpdate.p1Stats = p1Char.GetComponent<CharStats>();
+        HealthBarUpdate.p2Stats = p2Char.GetComponent<CharStats>();
     }
 
     // Update is called once per frame

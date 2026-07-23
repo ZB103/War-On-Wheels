@@ -254,8 +254,10 @@ MonoBehaviour:
   disability: Stargardt Disease
   blurb: '"Look over there!"'
   canJump: 1
-  maxHP: 95
-  currHP: 0
+  maxHealth: 95
+  health: 0
+  maxCooldown: 0
+  cooldown: 0
   dam: 8
   speed: 3
   primary: Cujo

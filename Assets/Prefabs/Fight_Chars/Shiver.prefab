@@ -254,8 +254,10 @@ MonoBehaviour:
   disability: Achondroplasia
   blurb: '"Elephants aren''t scared of little things, but you should be."'
   canJump: 1
-  maxHP: 65
-  currHP: 0
+  maxHealth: 65
+  health: 0
+  maxCooldown: 0
+  cooldown: 0
   dam: 7
   speed: 10
   primary: Get Back Here!

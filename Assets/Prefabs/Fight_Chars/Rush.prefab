@@ -254,8 +254,10 @@ MonoBehaviour:
   disability: Down's Syndrome
   blurb: '"People used to call me Kid Rush. Then I grew up."'
   canJump: 1
-  maxHP: 95
-  currHP: 0
+  maxHealth: 95
+  health: 0
+  maxCooldown: 0
+  cooldown: 0
   dam: 3
   speed: 7
   primary: Extra, Extra!

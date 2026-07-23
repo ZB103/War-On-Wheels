@@ -254,8 +254,10 @@ MonoBehaviour:
   disability: Autism
   blurb: '"I would like to go home."'
   canJump: 1
-  maxHP: 85
-  currHP: 0
+  maxHealth: 85
+  health: 0
+  maxCooldown: 0
+  cooldown: 0
   dam: 4
   speed: 8
   primary: Stim Attack
