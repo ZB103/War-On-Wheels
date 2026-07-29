@@ -50,6 +50,8 @@ public class LoadArena : MonoBehaviour
         //configure UI
         HealthBarUpdate.p1Stats = p1Char.GetComponent<CharStats>();
         HealthBarUpdate.p2Stats = p2Char.GetComponent<CharStats>();
+        CooldownBarUpdate.p1Stats = p1Char.GetComponent<CharStats>();
+        CooldownBarUpdate.p2Stats = p2Char.GetComponent<CharStats>();
     }
 
     // Update is called once per frame

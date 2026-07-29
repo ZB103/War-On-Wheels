@@ -12,8 +12,8 @@ public class CharStats : MonoBehaviour
     //stats
     public int maxHealth;
     public int health;      //defeat when health reaches 0
-    public int maxCooldown;
-    public int cooldown;    //special attack can be used when cooldown reaches 0
+    public float maxCooldown;
+    public float cooldown;    //special attack can be used when cooldown reaches max
     public int dam;
     public int speed;
     //primary attack
@@ -30,7 +30,7 @@ public class CharStats : MonoBehaviour
     void OnEnable()
     {
         health = maxHealth;
-        cooldown = maxCooldown;
+        cooldown = 0;
     }
 
     // Update is called once per frame

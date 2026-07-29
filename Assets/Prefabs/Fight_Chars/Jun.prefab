@@ -256,7 +256,7 @@ MonoBehaviour:
   canJump: 1
   maxHealth: 95
   health: 0
-  maxCooldown: 0
+  maxCooldown: 25
   cooldown: 0
   dam: 8
   speed: 3
