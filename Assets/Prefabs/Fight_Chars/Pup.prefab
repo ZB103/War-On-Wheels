@@ -47,6 +47,8 @@ GameObject:
   - component: {fileID: 1179554439217858955}
   - component: {fileID: 3660417443558360229}
   - component: {fileID: 7715174633625816747}
+  - component: {fileID: 4713484228624040559}
+  - component: {fileID: 4428294616218211837}
   m_Layer: 3
   m_Name: Sprite-Pup
   m_TagString: Untagged
@@ -287,3 +289,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4713484228624040559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8790242206735934840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f73f177d1624745a67450c5128cddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isP2: 0
+--- !u!114 &4428294616218211837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8790242206735934840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecfb9c9bff1b9e645b586ae7f566bd14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

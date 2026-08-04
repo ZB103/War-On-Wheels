@@ -47,6 +47,8 @@ GameObject:
   - component: {fileID: 4376746837798490850}
   - component: {fileID: 3660417443558360229}
   - component: {fileID: 9006251061493969205}
+  - component: {fileID: 6976502606193988528}
+  - component: {fileID: 9052281576135983537}
   m_Layer: 3
   m_Name: Sprite-Wyvern
   m_TagString: Untagged
@@ -287,3 +289,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6976502606193988528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8790242206735934840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f73f177d1624745a67450c5128cddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isP2: 0
+--- !u!114 &9052281576135983537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8790242206735934840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9a3115a9ccc2cc44b9c9e8124139dd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

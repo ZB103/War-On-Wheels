@@ -47,6 +47,8 @@ GameObject:
   - component: {fileID: 6362513639398850980}
   - component: {fileID: 3660417443558360229}
   - component: {fileID: 5321769240237734959}
+  - component: {fileID: 309472850654731734}
+  - component: {fileID: 4908560824305732467}
   m_Layer: 3
   m_Name: Sprite-Comman
   m_TagString: Untagged
@@ -288,3 +290,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &309472850654731734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8790242206735934840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f73f177d1624745a67450c5128cddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isP2: 0
+--- !u!114 &4908560824305732467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8790242206735934840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee3ebb3c71be5864e868e35a049b057c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

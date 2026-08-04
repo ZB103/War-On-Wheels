@@ -52,6 +52,10 @@ public class LoadArena : MonoBehaviour
         HealthBarUpdate.p2Stats = p2Char.GetComponent<CharStats>();
         CooldownBarUpdate.p1Stats = p1Char.GetComponent<CharStats>();
         CooldownBarUpdate.p2Stats = p2Char.GetComponent<CharStats>();
+
+        //configure health/cooldown ctrls
+        p1Char.GetComponent<Moves>().isP2 = false;
+        p2Char.GetComponent<Moves>().isP2 = true;
     }
 
     // Update is called once per frame
