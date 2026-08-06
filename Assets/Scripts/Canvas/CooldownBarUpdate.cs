@@ -24,13 +24,6 @@ public class CooldownBarUpdate : MonoBehaviour
         p2Fill = StartCoroutine(FillChargeP2());
     }
 
-    //TEMPORARY for testing
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T)) { UseCharge(1); }
-        if (Input.GetKeyDown(KeyCode.Y)) { UseCharge(2); }
-    }
-
     //Hurt function lowers player's health. Is called by std or spc attack script
     public void UseCharge(int player)
     {

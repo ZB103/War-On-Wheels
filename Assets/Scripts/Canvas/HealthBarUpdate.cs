@@ -18,15 +18,6 @@ public class HealthBarUpdate : MonoBehaviour
         UpdateBars();
     }
 
-    //TEMPORARY for testing
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.U)) { Hurt(1, 5); }
-        if (Input.GetKeyDown(KeyCode.I)) { Heal(1, 5); }
-        if (Input.GetKeyDown(KeyCode.J)) { Hurt(2, 5); }
-        if (Input.GetKeyDown(KeyCode.K)) { Heal(2, 5); }
-    }
-
     //Hurt function lowers player's health. Is called by std or spc attack script
     public void Hurt(int player, int dam)
     {
