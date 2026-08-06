@@ -51,7 +51,7 @@ GameObject:
   - component: {fileID: 5549407612191473931}
   m_Layer: 3
   m_Name: Sprite-Ice_Queen
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

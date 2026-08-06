@@ -57,6 +57,7 @@ public class CooldownBarUpdate : MonoBehaviour
             p1Stats.cooldown += (2 * p1Stats.speed * Time.deltaTime);
             yield return new WaitForSeconds(.1f);
         }
+        p1Stats.cooldown = p1Stats.maxCooldown;
         UpdateBars();
         yield return null;
     }
@@ -70,6 +71,7 @@ public class CooldownBarUpdate : MonoBehaviour
             p2Stats.cooldown += (2 * p2Stats.speed * Time.deltaTime);
             yield return new WaitForSeconds(.1f);
         }
+        p2Stats.cooldown = p2Stats.maxCooldown;
         UpdateBars();
         yield return null;
     }

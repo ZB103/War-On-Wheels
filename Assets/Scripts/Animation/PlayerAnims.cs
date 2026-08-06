@@ -10,6 +10,7 @@ public class PlayerAnims : AnimatorCoder
     public static PlayerAnims instance;
     private SpriteRenderer sprite;
     private BoxCollider2D pCollider;
+    private CharStats cStats;
     public bool flipAnims = false;  //p2's anims will be flipped, defined by LoadArena.cs
 
     private void Awake()
@@ -23,6 +24,7 @@ public class PlayerAnims : AnimatorCoder
         Initialize();
         sprite = GetComponent<SpriteRenderer>();
         pCollider = GetComponent<BoxCollider2D>();
+        cStats = GetComponent<CharStats>();
         if (flipAnims) { sprite.flipX = true; }
     }
 
@@ -37,6 +39,7 @@ public class PlayerAnims : AnimatorCoder
 
         void CheckSpcAttack()
         {
+            if (cStats.cooldown != cStats.maxCooldown) return;
             if (!flipAnims && !Input.GetKeyDown(KeyCode.E)) return;
             if (flipAnims && !Input.GetKeyDown(KeyCode.Return)) return;
 

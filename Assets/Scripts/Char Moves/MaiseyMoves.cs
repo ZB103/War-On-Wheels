@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MaiseyMoves : Moves
 {
-
     private void Start()
     {
         isP2 = gameObject.GetComponent<Moves>().isP2;
@@ -28,19 +27,18 @@ public class MaiseyMoves : Moves
 
     protected override void StdAttack()
     {
+        //std melee
         base.StdAttack();
-        print("Maisey 1");
     }
 
     protected override void SpcAttack()
     {
+        //std melee
         base.SpcAttack();
-        print(base.isP2);
     }
 
     protected override void DefMove()
     {
-        base.DefMove();
-        print("3");
+        //lowers damage taken
     }
 }
