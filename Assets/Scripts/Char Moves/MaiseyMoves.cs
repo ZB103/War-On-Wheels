@@ -6,7 +6,7 @@ public class MaiseyMoves : Moves
 {
     private void Start()
     {
-        isP2 = gameObject.GetComponent<Moves>().isP2;
+        isP2 = GetComponent<Moves>().isP2;
     }
 
     void Update()

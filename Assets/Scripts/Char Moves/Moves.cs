@@ -36,10 +36,10 @@ public class Moves : MonoBehaviour
     protected virtual void SpcAttack()
     {
         //if cooldown is not max, skip
-        if (pStats.cooldown != pStats.maxCooldown) return;
-        if (hasContact) { 
-            healthScript.Hurt(isP2 ? 1 : 2, pStats.dam);
+        if (pStats.cooldown == pStats.maxCooldown)
+        {
             cooldownScript.UseCharge(isP2 ? 2 : 1);
+            if (hasContact) { healthScript.Hurt(isP2 ? 1 : 2, pStats.dam); }
         }
     }
 
@@ -48,8 +48,11 @@ public class Moves : MonoBehaviour
     protected virtual void DefMove()
     {
         //if cooldown is not max, skip
-        if (pStats.cooldown != pStats.maxCooldown) return;
-        if (hasContact) { healthScript.Heal(isP2 ? 2 : 1, (int)pStats.dam/2); }
+        if (pStats.cooldown == pStats.maxCooldown)
+        {
+            cooldownScript.UseCharge(isP2 ? 2 : 1);
+            if (hasContact) { healthScript.Heal(isP2 ? 2 : 1, (int)pStats.dam / 2); }
+        }
     }
 
     protected void OnTriggerEnter2D(Collider2D collision)
@@ -59,6 +62,6 @@ public class Moves : MonoBehaviour
 
     protected void OnTriggerExit2D(Collider2D collision)
     {
-        hasContact = false;
+        if (collision.tag == "Player") { hasContact = false; }
     }
 }

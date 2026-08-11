@@ -31,15 +31,17 @@ public class PlayerAnims : AnimatorCoder
     // Update is called once per frame
     void Update()
     {
+        /*
         CheckSpcAttack();
         CheckStdAttack();
         CheckDefMove();
         CheckJump();
         DefaultAnimation(0);
+        */
 
         void CheckSpcAttack()
         {
-            if (cStats.cooldown != cStats.maxCooldown) return;
+            //if (cStats.cooldown != cStats.maxCooldown) return;
             if (!flipAnims && !Input.GetKeyDown(KeyCode.E)) return;
             if (flipAnims && !Input.GetKeyDown(KeyCode.Return)) return;
 
@@ -56,6 +58,7 @@ public class PlayerAnims : AnimatorCoder
 
         void CheckDefMove()
         {
+            //if (cStats.cooldown != cStats.maxCooldown) return;
             if (!flipAnims && !Input.GetKeyDown(KeyCode.Tab)) return;
             if (flipAnims && !Input.GetKeyDown(KeyCode.Slash)) return;
 
