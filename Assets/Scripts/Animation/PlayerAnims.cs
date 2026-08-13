@@ -10,12 +10,13 @@ public class PlayerAnims : AnimatorCoder
     public static PlayerAnims instance;
     private SpriteRenderer sprite;
     private BoxCollider2D pCollider;
-    private CharStats cStats;
+    public static int winner;
     public bool flipAnims = false;  //p2's anims will be flipped, defined by LoadArena.cs
 
     private void Awake()
     {
         instance = this;
+        winner = 0; //gets set by HealthBarUpdate.cs to 1 or 2
     }
 
     // Start is called before the first frame update
@@ -24,20 +25,37 @@ public class PlayerAnims : AnimatorCoder
         Initialize();
         sprite = GetComponent<SpriteRenderer>();
         pCollider = GetComponent<BoxCollider2D>();
-        cStats = GetComponent<CharStats>();
         if (flipAnims) { sprite.flipX = true; }
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*
-        CheckSpcAttack();
-        CheckStdAttack();
-        CheckDefMove();
-        CheckJump();
-        DefaultAnimation(0);
-        */
+        if (winner == 0)
+        {
+            CheckSpcAttack();
+            CheckStdAttack();
+            CheckDefMove();
+            CheckJump();
+            DefaultAnimation(0);
+        }
+        else
+        {
+            if (!flipAnims)
+            {
+                //p1 wins and this is p1
+                if (winner == 1) { Play(new(Animations.Win, true)); }
+                //p2 wins and this is p1
+                else if (winner == 2) { Play(new(Animations.Lose, true)); }
+            }
+            else
+            {
+                //p1 wins and this is p2
+                if (winner == 1) { Play(new(Animations.Lose, true)); }
+                //p2 wins and this is p2
+                else if (winner == 2) { Play(new(Animations.Win, true)); }
+            }
+        }
 
         void CheckSpcAttack()
         {

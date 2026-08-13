@@ -268,6 +268,8 @@ MonoBehaviour:
   specialDesc: Your cane doubles as a flamethrower
   defensive: Stood Too Fast...
   defensiveDesc: Drop to the ground to dodge an attack
+  primColor: {r: 0.75294125, g: 0.9294118, b: 0.93725497, a: 0}
+  secColor: {r: 0.22352943, g: 0.48627454, b: 0.74509805, a: 0}
 --- !u!95 &3384373415614899700
 Animator:
   serializedVersion: 5
@@ -314,3 +316,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63d33087030b25145ab7f2f3c183ea6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isP2: 0

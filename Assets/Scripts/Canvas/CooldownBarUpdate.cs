@@ -9,8 +9,8 @@ public class CooldownBarUpdate : MonoBehaviour
     public static CharStats p2Stats;
     public Slider p1CooldownBar;
     public Slider p2CooldownBar;
-    Coroutine p1Fill;
-    Coroutine p2Fill;
+    public Coroutine p1Fill;
+    public Coroutine p2Fill;
 
     // Start is called before the first frame update
     void Start()

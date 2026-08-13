@@ -269,6 +269,8 @@ MonoBehaviour:
   specialDesc: Bring a lightning bolt down on your opponent
   defensive: Aura
   defensiveDesc: Leave your body to reduce damage
+  primColor: {r: 0.2509804, g: 0.16862746, b: 0.33333334, a: 1}
+  secColor: {r: 0.9294118, g: 0.9294118, b: 0.9294118, a: 1}
 --- !u!95 &5321769240237734959
 Animator:
   serializedVersion: 5
@@ -315,3 +317,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee3ebb3c71be5864e868e35a049b057c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isP2: 0

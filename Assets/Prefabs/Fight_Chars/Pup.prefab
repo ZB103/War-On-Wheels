@@ -268,6 +268,8 @@ MonoBehaviour:
   specialDesc: Two spins bring thrice the smacking power
   defensive: Breather
   defensiveDesc: Resting restores your health
+  primColor: {r: 0.59607846, g: 0.2509804, b: 0.4431373, a: 1}
+  secColor: {r: 0.7294118, g: 0.70980394, b: 0.61960787, a: 1}
 --- !u!95 &7715174633625816747
 Animator:
   serializedVersion: 5
@@ -314,3 +316,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecfb9c9bff1b9e645b586ae7f566bd14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isP2: 0

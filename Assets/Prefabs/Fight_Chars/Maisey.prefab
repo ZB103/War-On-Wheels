@@ -268,6 +268,8 @@ MonoBehaviour:
   specialDesc: Your Special Interest knowledge blows your opponent away
   defensive: Quiet, Please!
   defensiveDesc: Wear your ear defenders to reduce damage
+  primColor: {r: 0.18431373, g: 0.24705884, b: 0.37647063, a: 1}
+  secColor: {r: 0.9568628, g: 0.6117647, b: 0.68235296, a: 1}
 --- !u!95 &8900170723294411484
 Animator:
   serializedVersion: 5

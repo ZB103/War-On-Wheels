@@ -16,14 +16,9 @@ public class LoadArena : MonoBehaviour
     //positions of objects on screen
     private Vector2 p1CharPos = new Vector2(-5f, 0f);
     private Vector2 p2CharPos = new Vector2(5f, 0f);
-    private Vector2 p1TextPos = new Vector2(415f, 8f);
-    private Vector2 p2TextPos = new Vector2(-545f, 8f);
     //text boxes
-    public TextMeshProUGUI flexTextbox;
     public TextMeshProUGUI leftTextbox;
     public TextMeshProUGUI rightTextbox;
-    public TextMeshProUGUI leftCtrlTextbox;
-    public TextMeshProUGUI rightCtrlTextbox;
 
     // Start is called before the first frame update
     void Awake()
@@ -36,6 +31,10 @@ public class LoadArena : MonoBehaviour
         p2Selection.transform.localScale = new Vector2(.5f, .5f);
         p1Char = p1Selection.transform.GetChild(0).gameObject;
         p2Char = p2Selection.transform.GetChild(0).gameObject;
+
+        //set text boxes
+        leftTextbox.text = p1Char.GetComponent<CharStats>().charName;
+        rightTextbox.text = p2Char.GetComponent<CharStats>().charName;
 
         //add controls
         p1Char.AddComponent<P1Controls>();

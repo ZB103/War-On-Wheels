@@ -268,6 +268,8 @@ MonoBehaviour:
   specialDesc: Get out the blash cannons
   defensive: Hey, Listen!
   defensiveDesc: Use your AAC Tablet as a shield to reduce damage
+  primColor: {r: 0.86666673, g: 0.5411765, b: 0.35686275, a: 1}
+  secColor: {r: 0.19215688, g: 0.13333334, b: 0.17254902, a: 1}
 --- !u!95 &1788506825964163234
 Animator:
   serializedVersion: 5
@@ -314,3 +316,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96dc0cfcca96b7b47a7f83086ad82d9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isP2: 0

@@ -25,6 +25,9 @@ public class CharStats : MonoBehaviour
     //defensive move
     public string defensive;
     public string defensiveDesc;
+    //colors
+    public Color primColor;
+    public Color secColor;
 
     // Start is called before the first frame update
     void OnEnable()
