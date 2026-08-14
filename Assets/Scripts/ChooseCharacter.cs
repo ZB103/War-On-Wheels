@@ -21,16 +21,26 @@ public class ChooseCharacter : MonoBehaviour
     private bool p1Ready = false;
     private bool p2Ready = false;
     //positions of objects on screen
-    private Vector2 p1CharPos = new Vector2(-4.5f, -.4f);
+    private Vector2 p1CharPos = new Vector2(-5f, -.4f);
     private Vector2 p2CharPos = new Vector2(5f, -.4f);
-    private Vector2 p1TextPos = new Vector2(415f, 8f);
-    private Vector2 p2TextPos = new Vector2(-545f, 8f);
+    private Vector2 p1TextPos = new Vector2(480f, 8f);
+    private Vector2 p2TextPos = new Vector2(-655f, 8f);
     //text boxes
-    public TextMeshProUGUI flexTextbox;
+    public GameObject flexTextboxHolder;
+    public TextMeshProUGUI blurbTextbox;
+    public TextMeshProUGUI movesTextbox;
+    public TextMeshProUGUI statsTextbox;
     public TextMeshProUGUI leftTextbox;
     public TextMeshProUGUI rightTextbox;
     public TextMeshProUGUI leftCtrlTextbox;
     public TextMeshProUGUI rightCtrlTextbox;
+    //stat image dots
+    public GameObject[] healthDots;
+    public GameObject[] damDots;
+    public GameObject[] speedDots;
+    private Color disabledColor = new Color(.4f,.4f,.4f,1);
+    //background image
+    public GameObject bg;
 
     // Start is called before the first frame update
     void OnEnable()
@@ -124,19 +134,42 @@ public class ChooseCharacter : MonoBehaviour
         characters[charIndex].SetActive(true);
         
         cs = characters[charIndex].GetComponent<CharStats>();
-        str = "{ " + cs.charName + " }\n"
-            + "maxHP - " + cs.maxHealth + "\n"
-            + "dam - " + cs.dam + "\n"
-            + "speed - " + cs.speed + "\n"
-            + "primary - " + cs.primary + ": " + cs.primaryDesc + "\n"
-            + "special - " + cs.special + ": " + cs.specialDesc + "\n"
-            + "defensive - " + cs.defensive + ": " + cs.defensiveDesc + "\n"
-            + cs.blurb;
+        str = cs.primary + ": " + cs.primaryDesc + "\n\n"
+        + cs.special + ": " + cs.specialDesc + "\n\n"
+        + cs.defensive + ": " + cs.defensiveDesc + "\n\n";
 
         //update textboxes
-        flexTextbox.text = str;
+        movesTextbox.text = str;
+        blurbTextbox.text = cs.blurb;
         if (playerChoosing == 1) { leftTextbox.text = "P1: " + cs.charName; }
         else if (playerChoosing == 2) { rightTextbox.text = "P2: " + cs.charName; }
+
+        //update statistics ranking dots
+        int hRank, dRank, sRank;
+        foreach (GameObject h in healthDots) { h.GetComponent<Image>().color = new Color(1, 1, 1, 1); }
+        foreach (GameObject d in damDots) { d.GetComponent<Image>().color = new Color(1, 1, 1, 1); }
+        foreach (GameObject s in speedDots) { s.GetComponent<Image>().color = new Color(1, 1, 1, 1); }
+        //calculate health rank 50-100
+        if (cs.maxHealth > 85) { hRank = 3; }
+        else if (cs.maxHealth > 70) { hRank = 2; }
+        else { hRank = 1; }
+        if (hRank < 3) { healthDots[2].GetComponent<Image>().color = disabledColor; }
+        if (hRank < 2) { healthDots[1].GetComponent<Image>().color = disabledColor; }
+
+        //calculate damage rank 3-10
+        if (cs.dam > 7) { dRank = 3; }
+        else if (cs.dam > 5) { dRank = 2; }
+        else { dRank = 1; }
+        if (dRank < 3) { damDots[2].GetComponent<Image>().color = disabledColor; }
+        if (dRank < 2) { damDots[1].GetComponent<Image>().color = disabledColor; }
+
+        //calculate speed rank 2-10
+        if (cs.speed > 6) { sRank = 3; }
+        else if (cs.speed > 4) { sRank = 2; }
+        else { sRank = 1; }
+        if (sRank < 3) { speedDots[2].GetComponent<Image>().color = disabledColor; }
+        if (sRank < 2) { speedDots[1].GetComponent<Image>().color = disabledColor; }
+
     }
 
     void P1Select()
@@ -145,10 +178,15 @@ public class ChooseCharacter : MonoBehaviour
         playerChoosing = 1;
 
         //update textboxes
-        flexTextbox.transform.localPosition = p1TextPos;
+        flexTextboxHolder.transform.localPosition = p1TextPos;
         rightTextbox.text = "";
         rightCtrlTextbox.text = "";
         leftCtrlTextbox.text = "[A] and [D] browse\n[E] select";
+        statsTextbox.text = "Health:\n\nDamage:\n\nSpeed:";
+
+        //update bg
+        bg.SetActive(true);
+        bg.GetComponent<SpriteRenderer>().flipX = true;
 
         //hide all chars but the first one selected and place in the P1 position
         foreach (GameObject g in characters)
@@ -166,10 +204,15 @@ public class ChooseCharacter : MonoBehaviour
         playerChoosing = 2;
 
         //update textboxes
-        flexTextbox.transform.localPosition = p2TextPos;
+        flexTextboxHolder.transform.localPosition = p2TextPos;
         leftTextbox.text = "";
         leftCtrlTextbox.text = "";
         rightCtrlTextbox.text = "[<-] and [->] browse\n[RETURN] select";
+        statsTextbox.text = "Health:\n\nDamage:\n\nSpeed:";
+
+        //update bg
+        bg.SetActive(true);
+        bg.GetComponent<SpriteRenderer>().flipX = false;
 
         //hide all chars but the first one selected and place in the P2 position
         foreach (GameObject g in characters)
@@ -189,11 +232,19 @@ public class ChooseCharacter : MonoBehaviour
         p2Ready = false;
 
         //update textboxes
-        flexTextbox.text = "";
+        blurbTextbox.text = "";
+        movesTextbox.text = "";
+        statsTextbox.text = "";
         leftTextbox.text = "P1: " + characters[p1Selection].GetComponent<CharStats>().charName;
         rightTextbox.text = "P2: " + characters[p2Selection].GetComponent<CharStats>().charName;
         leftCtrlTextbox.text = "[Q] change\n[E] finalize";
         rightCtrlTextbox.text = "[SHIFT] change\n[RETURN] ready";
+        foreach (GameObject h in healthDots) { h.GetComponent<Image>().color = new Color(1, 1, 1, 0); }
+        foreach (GameObject d in damDots) { d.GetComponent<Image>().color = new Color(1, 1, 1, 0); }
+        foreach (GameObject s in speedDots) { s.GetComponent<Image>().color = new Color(1, 1, 1, 0); }
+
+        //update bg
+        bg.SetActive(false);
 
         //show both characters
         characters[p1Selection].transform.parent.gameObject.transform.position = p1CharPos;

@@ -260,7 +260,7 @@ MonoBehaviour:
   health: 0
   maxCooldown: 25
   cooldown: 0
-  dam: 5
+  dam: 6
   speed: 4
   primary: Double Whammy
   primaryDesc: Two crutches bring twice the smacking power

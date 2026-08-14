@@ -257,7 +257,7 @@ MonoBehaviour:
   blurb: '"Being struck by lightning actually makes you more likely to be struck
     again."'
   canJump: 1
-  maxHealth: 90
+  maxHealth: 85
   health: 0
   maxCooldown: 25
   cooldown: 0
