@@ -21,8 +21,8 @@ public class ChooseCharacter : MonoBehaviour
     private bool p1Ready = false;
     private bool p2Ready = false;
     //positions of objects on screen
-    private Vector2 p1CharPos = new Vector2(-5f, -.4f);
-    private Vector2 p2CharPos = new Vector2(5f, -.4f);
+    private Vector2 p1CharPos = new Vector2(-6.15f, -.7f);
+    private Vector2 p2CharPos = new Vector2(6.15f, -.7f);
     private Vector2 p1TextPos = new Vector2(480f, 8f);
     private Vector2 p2TextPos = new Vector2(-655f, 8f);
     //text boxes
@@ -39,6 +39,7 @@ public class ChooseCharacter : MonoBehaviour
     public GameObject[] damDots;
     public GameObject[] speedDots;
     private Color disabledColor = new Color(.4f,.4f,.4f,1);
+    private GameObject clone;
     //background image
     public GameObject bg;
 
@@ -48,6 +49,7 @@ public class ChooseCharacter : MonoBehaviour
         StaticData.prefabs = prefabs;
         charIndex = 0;
         P1Select();
+        clone = null;
     }
 
     // Update is called once per frame
@@ -177,6 +179,10 @@ public class ChooseCharacter : MonoBehaviour
         p1Selection = -1;
         playerChoosing = 1;
 
+        //delete clone
+        try { Destroy(clone); }
+        catch { }
+
         //update textboxes
         flexTextboxHolder.transform.localPosition = p1TextPos;
         rightTextbox.text = "";
@@ -202,6 +208,10 @@ public class ChooseCharacter : MonoBehaviour
     {
         p2Selection = -1;
         playerChoosing = 2;
+
+        //delete clone
+        try { Destroy(clone); }
+        catch { }
 
         //update textboxes
         flexTextboxHolder.transform.localPosition = p2TextPos;
@@ -243,13 +253,18 @@ public class ChooseCharacter : MonoBehaviour
         foreach (GameObject d in damDots) { d.GetComponent<Image>().color = new Color(1, 1, 1, 0); }
         foreach (GameObject s in speedDots) { s.GetComponent<Image>().color = new Color(1, 1, 1, 0); }
 
-        //update bg
-        bg.SetActive(false);
+        //IF CHARS ARE THE SAME, DUPLICATE
+        if (p1Selection == p2Selection) {
+            clone = Instantiate(characters[p2Selection].transform.parent.gameObject,
+                    p1CharPos, new Quaternion(0, 0, 0, 0)); }
 
         //show both characters
         characters[p1Selection].transform.parent.gameObject.transform.position = p1CharPos;
         characters[p1Selection].SetActive(true);
         characters[p2Selection].transform.parent.gameObject.transform.position = p2CharPos;
         characters[p2Selection].SetActive(true);
+
+        //update bg
+        bg.SetActive(false);
     }
 }

@@ -254,7 +254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charName: Ashfall
   disability: Cerebral Palsy
-  blurb: '"Only a coward would avoid fighting me~"'
+  blurb: '"[ONLY COWARD WOULD AVOID FIGHTING ME~]"'
   canJump: 0
   maxHealth: 100
   health: 0

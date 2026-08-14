@@ -254,7 +254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charName: Ice Queen
   disability: Postural Orthostatic Tachycardia Syndrome
-  blurb: 
+  blurb: '"Blurb In Progress"'
   canJump: 1
   maxHealth: 70
   health: 0
