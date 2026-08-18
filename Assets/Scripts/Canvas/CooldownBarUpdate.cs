@@ -72,7 +72,6 @@ public class CooldownBarUpdate : MonoBehaviour
     //Update health bars on UI
     void UpdateBars()
     {
-        
         p1CooldownBar.value = p1Stats.cooldown;
         p2CooldownBar.value = p2Stats.cooldown;
     }

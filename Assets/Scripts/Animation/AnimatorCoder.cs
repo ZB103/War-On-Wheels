@@ -16,6 +16,7 @@ namespace SHG.AnimatorCoder
         private bool[] layerLocked;
         private ParameterDisplay[] parameters;
         private Coroutine[] currentCoroutine;
+        public bool lockInput;   //lock ability to attack again while attack is in progress
 
         /// <summary> Sets up the Animator Brain </summary>
         public void Initialize(Animator animator = null)
@@ -146,12 +147,14 @@ namespace SHG.AnimatorCoder
                     currentCoroutine[layer] = StartCoroutine(Wait());
                     IEnumerator Wait()
                     {
+                        lockInput = true;
                         animator.Update(0);
                         float delay = animator.GetNextAnimatorStateInfo(layer).length;
                         if (data.crossfade == 0) delay = animator.GetCurrentAnimatorStateInfo(layer).length;
                         yield return new WaitForSeconds(delay - data.nextAnimation.crossfade);
                         SetLocked(false, layer);
                         Play(data.nextAnimation, layer);
+                        lockInput = false;
                     }
                 }
 

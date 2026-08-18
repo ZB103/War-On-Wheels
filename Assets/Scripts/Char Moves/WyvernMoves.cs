@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class WyvernMoves : Moves
 {
+    private Vector2 chargeSpeed;
+    private Rigidbody2D rb;
+
     private void Start()
     {
         isP2 = gameObject.GetComponent<Moves>().isP2;
+        rb = gameObject.GetComponent<Rigidbody2D>();
+        chargeSpeed = new Vector2(5f, 0f);
     }
 
     void Update()
@@ -33,8 +38,7 @@ public class WyvernMoves : Moves
 
     protected override void SpcAttack()
     {
-        //char moves toward target before calling std
-        
+        //char moves right
     }
 
     protected override void DefMove()

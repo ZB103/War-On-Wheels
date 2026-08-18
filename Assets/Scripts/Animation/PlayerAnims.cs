@@ -9,13 +9,16 @@ public class PlayerAnims : AnimatorCoder
     [SerializeField] private float movementSpeed;
     public static PlayerAnims instance;
     private SpriteRenderer sprite;
+    private CharStats cStats;
     private BoxCollider2D pCollider;
     public static int winner;
     public bool flipAnims = false;  //p2's anims will be flipped, defined by LoadArena.cs
+    private CooldownBarUpdate cooldownScript;
 
     private void Awake()
     {
         instance = this;
+        cooldownScript = GameObject.Find("CanvasController").GetComponent<CooldownBarUpdate>();
         winner = 0; //gets set by HealthBarUpdate.cs to 1 or 2
     }
 
@@ -25,6 +28,7 @@ public class PlayerAnims : AnimatorCoder
         Initialize();
         sprite = GetComponent<SpriteRenderer>();
         pCollider = GetComponent<BoxCollider2D>();
+        cStats = GetComponent<CharStats>();
         if (flipAnims) { sprite.flipX = true; }
     }
 
@@ -55,15 +59,17 @@ public class PlayerAnims : AnimatorCoder
                 //p2 wins and this is p2
                 else if (winner == 2) { Play(new(Animations.Win, true)); }
             }
+            print(cStats.charName + " " + cStats.cooldown + " / " + cStats.maxCooldown);
         }
 
         void CheckSpcAttack()
         {
-            //if (cStats.cooldown != cStats.maxCooldown) return;
+            if (cStats.cooldown != cStats.maxCooldown) return;
             if (!flipAnims && !Input.GetKeyDown(KeyCode.E)) return;
             if (flipAnims && !Input.GetKeyDown(KeyCode.Return)) return;
 
             Play(new(Animations.Spc_Attack, true, new()));
+            cooldownScript.UseCharge(flipAnims ? 2 : 1);
         }
         
         void CheckStdAttack()
@@ -76,11 +82,12 @@ public class PlayerAnims : AnimatorCoder
 
         void CheckDefMove()
         {
-            //if (cStats.cooldown != cStats.maxCooldown) return;
+            if (cStats.cooldown != cStats.maxCooldown) return;
             if (!flipAnims && !Input.GetKeyDown(KeyCode.Tab)) return;
             if (flipAnims && !Input.GetKeyDown(KeyCode.Slash)) return;
 
             Play(new(Animations.Def_Move, true, new()));
+            cooldownScript.UseCharge(flipAnims ? 2 : 1);
         }
 
         void CheckJump()

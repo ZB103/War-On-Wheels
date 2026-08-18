@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using SHG.AnimatorCoder;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
@@ -16,6 +17,8 @@ public class Moves : MonoBehaviour
     public bool isP2;
     //whether is colliding with other player
     protected bool hasContact;
+    //player animations
+    private PlayerAnims pa;
 
     private void Awake()
     {
@@ -23,6 +26,7 @@ public class Moves : MonoBehaviour
         healthScript = GameObject.Find("CanvasController").GetComponent<HealthBarUpdate>();
         cooldownScript = GameObject.Find("CanvasController").GetComponent<CooldownBarUpdate>();
         pStats = gameObject.GetComponent<CharStats>();
+        pa = gameObject.GetComponent<PlayerAnims>();    //broken???
         hasContact = false;
     }
 
@@ -30,6 +34,9 @@ public class Moves : MonoBehaviour
     //Chars w/ ranged attacks have override functions in NameMoves scripts
     protected virtual void StdAttack()
     {
+        //if character is attacking or defending animation, return
+        if (gameObject.GetComponent<PlayerAnims>().lockInput) return;
+
         if (hasContact) { healthScript.Hurt(isP2 ? 1 : 2, (int)pStats.dam/2); }
     }
 
@@ -38,7 +45,7 @@ public class Moves : MonoBehaviour
         //if cooldown is not max, skip
         if (pStats.cooldown == pStats.maxCooldown)
         {
-            cooldownScript.UseCharge(isP2 ? 2 : 1);
+            //cooldownScript.UseCharge(isP2 ? 2 : 1);
             if (hasContact) { healthScript.Hurt(isP2 ? 1 : 2, pStats.dam); }
         }
     }
@@ -50,8 +57,8 @@ public class Moves : MonoBehaviour
         //if cooldown is not max, skip
         if (pStats.cooldown == pStats.maxCooldown)
         {
-            cooldownScript.UseCharge(isP2 ? 2 : 1);
-            if (hasContact) { healthScript.Heal(isP2 ? 2 : 1, (int)pStats.dam / 2); }
+            //cooldownScript.UseCharge(isP2 ? 2 : 1);
+            healthScript.Heal(isP2 ? 2 : 1, (int)pStats.dam);
         }
     }
 
