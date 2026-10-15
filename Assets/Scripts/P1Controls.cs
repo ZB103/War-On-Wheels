@@ -146,18 +146,6 @@ public class P1Controls : MonoBehaviour
         return Physics2D.BoxCast(pCollider.bounds.center, pCollider.bounds.size, 0f, Vector2.down, 0.5f);
     }
 
-    //determines whether the player is just above the ground, for purposes of queueing a jump
-    public bool IsAlmostGrounded()
-    {
-        return Physics2D.BoxCast(pCollider.bounds.center, pCollider.bounds.size, 0f, Vector2.down, 0.85f);
-    }
-
-    //change move/jump stats based on stress levels
-    public void UpdateStats()
-    {
-        
-    }
-
     public void OnTriggerEnter2D(Collider2D collision)
     {
         
