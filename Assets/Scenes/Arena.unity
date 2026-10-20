@@ -632,7 +632,7 @@ GameObject:
   m_Component:
   - component: {fileID: 538060241}
   - component: {fileID: 538060240}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -710,7 +710,7 @@ GameObject:
   - component: {fileID: 647701105}
   - component: {fileID: 647701104}
   - component: {fileID: 647701103}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
