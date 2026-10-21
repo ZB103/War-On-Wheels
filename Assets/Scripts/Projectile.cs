@@ -17,8 +17,14 @@ public class Projectile : MonoBehaviour
     {
         if (!collision.gameObject.CompareTag("Player")) { return; }
         //if shooter is P1 and hit is P2
-        if (!projectorIsP2 && collision.gameObject.GetComponent<Moves>().isP2)  { Moves.healthScript.Hurt(2, dam); }
+        if (!projectorIsP2 && collision.gameObject.GetComponent<Moves>().isP2)  { 
+            Moves.healthScript.Hurt(2, dam);
+            Destroy(gameObject.transform.parent.gameObject);
+        }
         //if shooter is P2 and hit is P1
-        else if (projectorIsP2 && !collision.gameObject.GetComponent<Moves>().isP2) { Moves.healthScript.Hurt(1, dam); }
+        else if (projectorIsP2 && !collision.gameObject.GetComponent<Moves>().isP2) { 
+            Moves.healthScript.Hurt(1, dam);
+            Destroy(gameObject.transform.parent.gameObject);
+        }
     }
 }

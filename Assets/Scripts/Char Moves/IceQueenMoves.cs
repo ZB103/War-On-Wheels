@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class IceQueenMoves : Moves
 {
-    private GameObject[] salts = new GameObject[16];
+    private GameObject[] salts = new GameObject[9];
     public GameObject projectilePrefab;
 
     private void Start()
@@ -63,7 +63,7 @@ public class IceQueenMoves : Moves
                 {
                     salts[i+j] = Instantiate(projectilePrefab, new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), new Quaternion(0, 0, 0, 0));
                     salts[i+j].transform.localScale = new Vector2(.05f, .05f);
-                    salts[i+j].GetComponentInChildren<Rigidbody2D>().velocity = new Vector2(j + 10, i + 15);
+                    salts[i+j].GetComponentInChildren<Rigidbody2D>().velocity = new Vector2(isP2? -(j+10) : j+10, i + 15);
                     salts[i+j].GetComponentInChildren<Projectile>().projectorIsP2 = isP2;
                 }
                 //only 1 in 3 do damage
@@ -82,7 +82,8 @@ public class IceQueenMoves : Moves
         {
             GameObject fireball = Instantiate(projectilePrefab, new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), new Quaternion(0, 0, 0, 0));
             fireball.transform.localScale = new Vector2(.5f, .5f);
-            fireball.GetComponentInChildren<Rigidbody2D>().velocity = new Vector2(45, 0);
+            fireball.GetComponentInChildren<Rigidbody2D>().gravityScale = 0;
+            fireball.GetComponentInChildren<Rigidbody2D>().velocity = new Vector2(isP2? -40 : 40, 0);
             fireball.GetComponentInChildren<Projectile>().dam = 10;
             fireball.GetComponentInChildren<Projectile>().projectorIsP2 = isP2;
         }
