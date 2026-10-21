@@ -59,12 +59,15 @@ public class IceQueenMoves : Moves
         {
             for (int i = 0; i < 3; i++)
             {
-                for (int j = 0; j < 5; j++)
+                for (int j = 0; j < 3; j++)
                 {
-                    salts[i] = Instantiate(projectilePrefab, new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), new Quaternion(0, 0, 0, 0));
-                    salts[i].transform.localScale = new Vector2(.05f, .05f);
-                    salts[i].GetComponentInChildren<Rigidbody2D>().velocity = new Vector2(j + 10, i + 15);
+                    salts[i+j] = Instantiate(projectilePrefab, new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), new Quaternion(0, 0, 0, 0));
+                    salts[i+j].transform.localScale = new Vector2(.05f, .05f);
+                    salts[i+j].GetComponentInChildren<Rigidbody2D>().velocity = new Vector2(j + 10, i + 15);
+                    salts[i+j].GetComponentInChildren<Projectile>().projectorIsP2 = isP2;
                 }
+                //only 1 in 3 do damage
+                salts[i].GetComponentInChildren<Projectile>().dam = 1;
                 yield return new WaitForSeconds(.05f);
             }
         }
@@ -79,8 +82,9 @@ public class IceQueenMoves : Moves
         {
             GameObject fireball = Instantiate(projectilePrefab, new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), new Quaternion(0, 0, 0, 0));
             fireball.transform.localScale = new Vector2(.5f, .5f);
-            //fireball.GetComponentInChildren<Rigidbody2D>().AddForce(Physics.gravity);
-            fireball.GetComponentInChildren<Rigidbody2D>().velocity = new Vector2(50, 0);
+            fireball.GetComponentInChildren<Rigidbody2D>().velocity = new Vector2(45, 0);
+            fireball.GetComponentInChildren<Projectile>().dam = 10;
+            fireball.GetComponentInChildren<Projectile>().projectorIsP2 = isP2;
         }
     }
 }

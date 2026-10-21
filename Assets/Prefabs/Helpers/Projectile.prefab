@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 769334567685321132}
   - component: {fileID: 5882715287177666356}
   - component: {fileID: 575978765216753767}
+  - component: {fileID: 2953950622919220696}
   m_Layer: 3
   m_Name: Projectile_Sprite
   m_TagString: Untagged
@@ -229,3 +230,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5cc0808524ba1041ab9c592c21aa9c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2953950622919220696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956873402021983351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ba488bd7853e54418a833353a4dfb3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dam: 0
+  projectorIsP2: 0
