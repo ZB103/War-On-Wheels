@@ -39,6 +39,7 @@ public class MaiseyMoves : Moves
 
     protected override void DefMove()
     {
-        //lowers damage taken
+        //if character is attacking or defending animation, return
+        if (gameObject.GetComponent<PlayerAnims>().lockInput) return;
     }
 }

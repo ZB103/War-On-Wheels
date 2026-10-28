@@ -17,6 +17,8 @@ public class Moves : MonoBehaviour
     public bool isP2;
     //whether is colliding with other player
     protected bool hasContact;
+    //whether is colliding with walls or ceiling
+    protected bool touchingBounds;
     //player animations
     private PlayerAnims pa;
 
@@ -28,6 +30,7 @@ public class Moves : MonoBehaviour
         pStats = gameObject.GetComponent<CharStats>();
         pa = gameObject.GetComponent<PlayerAnims>();    //broken???
         hasContact = false;
+        touchingBounds = false;
     }
 
     //the default attack funcs presume a close-range melee attack.
@@ -42,10 +45,12 @@ public class Moves : MonoBehaviour
 
     protected virtual void SpcAttack()
     {
+        //if character is attacking or defending animation, return
+        if (gameObject.GetComponent<PlayerAnims>().lockInput) return;
+
         //if cooldown is not max, skip
         if (pStats.cooldown == pStats.maxCooldown)
         {
-            //cooldownScript.UseCharge(isP2 ? 2 : 1);
             if (hasContact) { healthScript.Hurt(isP2 ? 1 : 2, pStats.dam); }
         }
     }
@@ -54,10 +59,12 @@ public class Moves : MonoBehaviour
     //Chars w/ other def moves have override functions in NameMoves scripts
     protected virtual void DefMove()
     {
+        //if character is attacking or defending animation, return
+        if (gameObject.GetComponent<PlayerAnims>().lockInput) return;
+
         //if cooldown is not max, skip
         if (pStats.cooldown == pStats.maxCooldown)
         {
-            //cooldownScript.UseCharge(isP2 ? 2 : 1);
             healthScript.Heal(isP2 ? 2 : 1, (int)pStats.dam);
         }
     }
@@ -65,10 +72,12 @@ public class Moves : MonoBehaviour
     protected void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player") { hasContact = true; }
+        else if (collision.tag == "Bounds") { touchingBounds = true; }
     }
 
     protected void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.tag == "Player") { hasContact = false; }
+        else if (collision.tag == "Bounds") { touchingBounds = false; }
     }
 }

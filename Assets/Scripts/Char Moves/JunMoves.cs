@@ -27,16 +27,19 @@ public class JunMoves : Moves
 
     protected override void StdAttack()
     {
-        //ranged attack
+        //if character is attacking or defending animation, return
+        if (gameObject.GetComponent<PlayerAnims>().lockInput) return;
     }
 
     protected override void SpcAttack()
     {
-        //ranged attack
+        //if character is attacking or defending animation, return
+        if (gameObject.GetComponent<PlayerAnims>().lockInput) return;
     }
 
     protected override void DefMove()
     {
-        //reduce damage
+        //if character is attacking or defending animation, return
+        if (gameObject.GetComponent<PlayerAnims>().lockInput) return;
     }
 }

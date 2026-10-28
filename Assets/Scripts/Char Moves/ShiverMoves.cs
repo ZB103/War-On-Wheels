@@ -27,16 +27,19 @@ public class ShiverMoves : Moves
 
     protected override void StdAttack()
     {
-        //ranged attack
+        //if character is attacking or defending animation, return
+        if (gameObject.GetComponent<PlayerAnims>().lockInput) return;
     }
 
     protected override void SpcAttack()
     {
-        //char moves slightly
+        //if character is attacking or defending animation, return
+        if (gameObject.GetComponent<PlayerAnims>().lockInput) return;
     }
 
     protected override void DefMove()
     {
-        //dodge
+        //if character is attacking or defending animation, return
+        if (gameObject.GetComponent<PlayerAnims>().lockInput) return;
     }
 }

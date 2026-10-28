@@ -41,13 +41,17 @@ public class IceQueenMoves : Moves
 
     protected override void SpcAttack()
     {
+        //if character is attacking or defending animation, return
+        if (gameObject.GetComponent<PlayerAnims>().lockInput) return;
+
         //shoot a fireball
         StartCoroutine(shootFireball());
     }
 
     protected override void DefMove()
     {
-        //dodge
+        //if character is attacking or defending animation, return
+        if (gameObject.GetComponent<PlayerAnims>().lockInput) return;
     }
 
     IEnumerator throwSalt()

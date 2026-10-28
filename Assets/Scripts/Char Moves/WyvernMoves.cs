@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class WyvernMoves : Moves
 {
-    private Vector2 chargeSpeed;
+    private bool chargeHit;
+    private float chargeSpeed;
     private Rigidbody2D rb;
 
     private void Start()
     {
         isP2 = gameObject.GetComponent<Moves>().isP2;
         rb = gameObject.GetComponent<Rigidbody2D>();
-        chargeSpeed = new Vector2(5f, 0f);
+        chargeHit = false;
+        chargeSpeed = gameObject.GetComponent<CharStats>().speed * 10f;
     }
 
     void Update()
@@ -38,12 +40,42 @@ public class WyvernMoves : Moves
 
     protected override void SpcAttack()
     {
-        //char moves right
+        //if character is attacking or defending animation, return
+        if (gameObject.GetComponent<PlayerAnims>().lockInput) return;
+
+        StartCoroutine(checkChargeHit());
     }
 
     protected override void DefMove()
     {
         //std heal
         base.DefMove();
+    }
+
+    //spc attack helper - check whether the enemy was hit and damage them
+    private IEnumerator checkChargeHit()
+    {
+        yield return new WaitForSeconds(.05f);
+
+        //only shoot if the standard attack animation is playing
+        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Spc_Attack"))
+        {
+            //move player forward
+            rb.velocity = new Vector2(isP2 ? -(chargeSpeed) : chargeSpeed, rb.velocity.y);
+            rb.AddForce(new Vector2(isP2 ? 1 : -1, 0));  //decelerate
+            chargeHit = false;
+
+            //check for collision during move
+            float timer = .2f;
+            while (timer > 0)
+            {
+                if (hasContact) chargeHit = true;
+                timer = timer - Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+
+            //do damage if applicable
+            if (chargeHit) healthScript.Hurt(isP2 ? 1 : 2, pStats.dam);
+        }
     }
 }

@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class AshfallMoves : Moves
 {
+    private bool chargeHit;
+    private float chargeSpeed;
+    private Rigidbody2D rb;
+
     private void Start()
     {
         isP2 = gameObject.GetComponent<Moves>().isP2;
+        rb = gameObject.GetComponent<Rigidbody2D>();
+        chargeSpeed = gameObject.GetComponent<CharStats>().speed * 10f;
+        chargeHit = false;
     }
 
     void Update()
@@ -27,16 +34,48 @@ public class AshfallMoves : Moves
 
     protected override void StdAttack()
     {
-        //char moves
+        //if character is attacking or defending animation, return
+        if (gameObject.GetComponent<PlayerAnims>().lockInput) return;
+
+        StartCoroutine(checkChargeHit());
     }
 
     protected override void SpcAttack()
     {
-        //ranged attack
+        //if character is attacking or defending animation, return
+        if (gameObject.GetComponent<PlayerAnims>().lockInput) return;
     }
 
     protected override void DefMove()
     {
-        //reduce damage
+        //if character is attacking or defending animation, return
+        if (gameObject.GetComponent<PlayerAnims>().lockInput) return;
+    }
+
+    //std attack helper - check whether the enemy was hit and damage them
+    private IEnumerator checkChargeHit()
+    {
+        yield return new WaitForSeconds(.05f);
+
+        //only shoot if the standard attack animation is playing
+        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Std_Attack"))
+        {
+            //move player forward
+            rb.velocity = new Vector2(isP2 ? -(chargeSpeed) : chargeSpeed, rb.velocity.y);
+            rb.AddForce(new Vector2(isP2 ? 1 : -1, 0));  //decelerate
+            chargeHit = false;
+
+            //check for collision during move
+            float timer = .1f;
+            while (timer > 0)
+            {
+                if (hasContact) chargeHit = true;
+                timer = timer - Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+
+            //do damage if applicable
+            if (chargeHit) healthScript.Hurt(isP2 ? 1 : 2, pStats.dam);
+        }
     }
 }
