@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class ShiverMoves : Moves
 {
+    public GameObject claw;
     private void Start()
     {
         isP2 = gameObject.GetComponent<Moves>().isP2;
+        //claw.SetActive(false);  //hide claw to start
     }
 
     void Update()
@@ -29,6 +31,9 @@ public class ShiverMoves : Moves
     {
         //if character is attacking or defending animation, return
         if (gameObject.GetComponent<PlayerAnims>().lockInput) return;
+
+        //show grabber animation
+        if (claw.GetComponent<Claw>().Attack()) { healthScript.Hurt(isP2 ? 1 : 2, pStats.dam); }
     }
 
     protected override void SpcAttack()
