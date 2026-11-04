@@ -17,11 +17,9 @@ namespace SHG.AnimatorCoder
         Win,
         Lose,
         Claw,
-        Claw_Flip,
         Dog_Idle,
-        Dog_Idle_Flip,
-        Dog_Attack,
-        Dog_Attack_Flip,
+        Dog_Run,
+        Dog_Jump,
         RESET  //Keep Reset
     }
 
