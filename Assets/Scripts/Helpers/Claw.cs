@@ -15,40 +15,57 @@ public class Claw : AnimatorCoder
     {
         Initialize();
         sr = gameObject.GetComponent<SpriteRenderer>();
-        Shiver = GameObject.Find("Sprite-Shiver");
+        Shiver = gameObject.transform.parent.gameObject;
         if (Shiver.GetComponent<ShiverMoves>().isP2) 
         { 
             sr.flipX = true;
-            gameObject.transform.localPosition = new Vector2(-3.5f, -.5f);
+            gameObject.transform.localPosition = new Vector2(-gameObject.transform.localPosition.x, gameObject.transform.localPosition.y);
         }
         else
         {
             sr.flipX = false;
-            gameObject.transform.localPosition = new Vector2(3.5f, -.5f);
         }
-        sr.color = new Color(1,1,1,0);  //hide claw to start
         hasContact = false;
     }
 
     public bool Attack()
     {
         //play animation
-        sr.color = new Color(1, 1, 1, 1);
         Play(new(Animations.Claw, true, new()));
 
-            //determine hit
-            return hasContact;
+        //determine hit
+        return hasContact;
     }
 
-    public override void DefaultAnimation(int layer) { sr.color = new Color(1, 1, 1, 0); }
+    public override void DefaultAnimation(int layer) { Play(new(Animations.EMPTY, false, new())); }
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Player") { hasContact = true; }
+    {   //shiver compared to is the specific shiver gameobject declared above
+        if (collision.tag == "Player")
+        {
+            //check for edge case: both players are Shiver
+            if(collision.gameObject.name == Shiver.name)
+            {
+                if ((Shiver.GetComponent<ShiverMoves>().isP2 && !collision.GetComponent<ShiverMoves>().isP2) ||
+                        (!Shiver.GetComponent<ShiverMoves>().isP2 && collision.GetComponent<ShiverMoves>().isP2))
+                    { hasContact = true; }
+            }
+            else { hasContact = true; }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Player") { hasContact = false; }
+    {   //shiver compared to is the specific shiver gameobject declared above
+        if (collision.tag == "Player")
+        {
+            //check for edge case: both players are Shiver
+            if (collision.gameObject.name == Shiver.name)
+            {
+                if ((Shiver.GetComponent<ShiverMoves>().isP2 && !collision.GetComponent<ShiverMoves>().isP2) ||
+                        (!Shiver.GetComponent<ShiverMoves>().isP2 && collision.GetComponent<ShiverMoves>().isP2))
+                { hasContact = false; }
+            }
+            else { hasContact = false; }
+        }
     }
 }

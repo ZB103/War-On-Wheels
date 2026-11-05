@@ -1542,6 +1542,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jun
       objectReference: {fileID: 0}
+    - target: {fileID: 4148237048771053881, guid: a7c663acfe3ba7c4ab5d1ba6c01ed6b9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4153368418836963661, guid: a7c663acfe3ba7c4ab5d1ba6c01ed6b9, type: 3}
     - {fileID: 2410559322460697676, guid: a7c663acfe3ba7c4ab5d1ba6c01ed6b9, type: 3}
@@ -2101,6 +2105,26 @@ PrefabInstance:
     - target: {fileID: 8790242206735934840, guid: bb0f83c01a3c5f241a33e0500f73dc82, type: 3}
       propertyPath: m_Name
       value: Sprite-Shiver
+      objectReference: {fileID: 0}
+    - target: {fileID: 9118550149531002678, guid: bb0f83c01a3c5f241a33e0500f73dc82, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9118550149531002678, guid: bb0f83c01a3c5f241a33e0500f73dc82, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9118550149531002678, guid: bb0f83c01a3c5f241a33e0500f73dc82, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9118550149531002678, guid: bb0f83c01a3c5f241a33e0500f73dc82, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9174747837066100265, guid: bb0f83c01a3c5f241a33e0500f73dc82, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4153368418836963661, guid: bb0f83c01a3c5f241a33e0500f73dc82, type: 3}

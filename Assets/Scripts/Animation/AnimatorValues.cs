@@ -20,6 +20,7 @@ namespace SHG.AnimatorCoder
         Dog_Idle,
         Dog_Run,
         Dog_Jump,
+        EMPTY,
         RESET  //Keep Reset
     }
 
