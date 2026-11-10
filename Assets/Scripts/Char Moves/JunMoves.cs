@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class JunMoves : Moves
 {
+    public GameObject dog;
+
     private void Start()
     {
         isP2 = gameObject.GetComponent<Moves>().isP2;
@@ -29,6 +31,9 @@ public class JunMoves : Moves
     {
         //if character is attacking or defending animation, return
         if (gameObject.GetComponent<PlayerAnims>().lockInput) return;
+
+        //show dog animation
+        if (dog.GetComponent<Dog>().Attack()) { healthScript.Hurt(isP2 ? 1 : 2, pStats.dam); }
     }
 
     protected override void SpcAttack()

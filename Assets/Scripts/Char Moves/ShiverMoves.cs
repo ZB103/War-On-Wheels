@@ -8,7 +8,6 @@ public class ShiverMoves : Moves
     private void Start()
     {
         isP2 = gameObject.GetComponent<Moves>().isP2;
-        //claw.SetActive(false);  //hide claw to start
     }
 
     void Update()
