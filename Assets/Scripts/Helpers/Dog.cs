@@ -37,11 +37,9 @@ public class Dog : AnimatorCoder
         trackContact = false;
     }
 
-    public bool Attack()
+    public void Attack()
     {
         StartCoroutine(DogJump());
-
-        return biteConnected;
     }
 
     public override void DefaultAnimation(int layer)
@@ -51,8 +49,10 @@ public class Dog : AnimatorCoder
         //fix later
         //if (junAnim.GetCurrentAnimation(0) == Animations.Forward || junAnim.GetCurrentAnimation(0) == Animations.Backward)
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
-            { Play(new(Animations.Dog_Run)); }
-        else { Play(new(Animations.Dog_Idle)); }
+            { Play(new(Animations.Dog_Run, false, new())); }
+        else { Play(new(Animations.Dog_Idle, false, new())); }
+        if (rb.velocity.y > 0) { Play(new(Animations.Dog_Jump, true, new())); }
+        else if (rb.velocity.x != 0) { Play(new(Animations.Dog_Run, false, new())); }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -67,6 +67,11 @@ public class Dog : AnimatorCoder
                 { hasContact = true; }
             }
             else { hasContact = true; }
+
+        //if dog hits ground, stop y motion
+        if (collision.tag == "Ground" || gameObject.transform.localPosition.y < -.33) { rb.velocity = new Vector2(rb.velocity.x, 0); }
+        //if dog hits wall, stop x motion
+        if (collision.tag == "Bounds") { rb.velocity = new Vector2(0, rb.velocity.y); }
         }
     }
 
@@ -87,17 +92,35 @@ public class Dog : AnimatorCoder
 
     IEnumerator DogJump()
     {
+        Vector2 startCoords = gameObject.transform.localPosition;
+
         //dog runs
-        rb.velocity = new Vector2(isP2 ? -2 : 2, 0);
+        rb.velocity = new Vector2(isP2 ? -5 : 5, 0);
         yield return new WaitForSeconds(.5f);
 
         //dog jumps
-        trackContact = true;
         biteConnected = false;
+        rb.velocity = new Vector2(isP2 ? -5:5, 15);
+        yield return new WaitForSeconds(.1f);
+        do
+        {
+            if (hasContact) biteConnected = true;
+            rb.velocity = new Vector2(isP2 ? -5 : 5, rb.velocity.y - 1);
+            yield return new WaitForEndOfFrame();
+        } while (gameObject.transform.localPosition.y > startCoords.y);
+        gameObject.transform.localPosition = new Vector2(gameObject.transform.localPosition.x, startCoords.y);
+        rb.velocity = new Vector2(0, 0);
+        yield return new WaitForSeconds(.5f);
 
-        //determine if hit
-        //while (rb.velocity.y > 0) { if (hasContact) { biteConnected = true; } }
-        //trackContact = false;
+        //dog returns to Jun's side
+        sr.flipX = !sr.flipX;
+        rb.velocity = new Vector2(isP2 ? 5 : -5, 0);
+        if (!isP2) {while (gameObject.transform.localPosition.x > startCoords.x) { yield return new WaitForEndOfFrame(); } }
+        else { while (gameObject.transform.localPosition.x < startCoords.x) { yield return new WaitForEndOfFrame(); } }
+        rb.velocity = new Vector2(0, 0);
+        sr.flipX = !sr.flipX;
 
+        //determine hit
+        
     }
 }

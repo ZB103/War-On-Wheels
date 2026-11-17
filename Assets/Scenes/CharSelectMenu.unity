@@ -1542,6 +1542,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jun
       objectReference: {fileID: 0}
+    - target: {fileID: 3866800642647423134, guid: a7c663acfe3ba7c4ab5d1ba6c01ed6b9, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4148237048771053881, guid: a7c663acfe3ba7c4ab5d1ba6c01ed6b9, type: 3}
       propertyPath: m_IsActive
       value: 0
