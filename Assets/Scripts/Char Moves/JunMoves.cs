@@ -32,8 +32,8 @@ public class JunMoves : Moves
         //if character is attacking or defending animation, return
         if (gameObject.GetComponent<PlayerAnims>().lockInput) return;
 
-        //show dog animation
-        if (dog.GetComponent<Dog>().Attack()) { healthScript.Hurt(isP2 ? 1 : 2, pStats.dam); }
+        //invoke dog attack function
+        dog.GetComponent<Dog>().Attack();
     }
 
     protected override void SpcAttack()
@@ -46,5 +46,11 @@ public class JunMoves : Moves
     {
         //if character is attacking or defending animation, return
         if (gameObject.GetComponent<PlayerAnims>().lockInput) return;
+    }
+
+    //helper for attack from dog
+    public void EscalateAtk()
+    {
+        healthScript.Hurt(isP2 ? 1 : 2, pStats.dam);
     }
 }

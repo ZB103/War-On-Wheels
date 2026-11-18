@@ -12,7 +12,7 @@ public class Dog : AnimatorCoder
     private AnimatorCoder junAnim;
     private bool hasContact;    //in the moment
     private bool biteConnected; //in an attack
-    private bool trackContact;  //enabled during period of time dog is jumping
+    private bool jumpStarted;   //animation trigger
 
     // Start is called before the first frame update
     void Start()
@@ -34,9 +34,20 @@ public class Dog : AnimatorCoder
         }
         hasContact = false;
         biteConnected = false;
-        trackContact = false;
+        jumpStarted = false;
     }
 
+    void Update()
+    {
+        CheckJump();
+
+        void CheckJump()
+        {
+            if (jumpStarted) Play(new(Animations.Dog_Jump, true));
+        }
+    }
+
+    //initiate coroutine for attack
     public void Attack()
     {
         StartCoroutine(DogJump());
@@ -44,20 +55,14 @@ public class Dog : AnimatorCoder
 
     public override void DefaultAnimation(int layer)
     {
-        biteConnected = false;  //reset
         //if Jun moves, the dog moves too
-        //fix later
-        //if (junAnim.GetCurrentAnimation(0) == Animations.Forward || junAnim.GetCurrentAnimation(0) == Animations.Backward)
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
-            { Play(new(Animations.Dog_Run, false, new())); }
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)) { Play(new(Animations.Dog_Run, false, new())); }
         else { Play(new(Animations.Dog_Idle, false, new())); }
-        if (rb.velocity.y > 0) { Play(new(Animations.Dog_Jump, true, new())); }
-        else if (rb.velocity.x != 0) { Play(new(Animations.Dog_Run, false, new())); }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {   //Jun compared to is the specific Jun gameobject declared above
-        if (trackContact && collision.tag == "Player")
+        if (collision.tag == "Player")
         {
             //check for edge case: both players are Jun
             if (collision.gameObject.name == Jun.name)
@@ -77,7 +82,7 @@ public class Dog : AnimatorCoder
 
     private void OnTriggerExit2D(Collider2D collision)
     {   //Jun compared to is the specific Jun gameobject declared above
-        if (trackContact && collision.tag == "Player")
+        if (collision.tag == "Player")
         {
             //check for edge case: both players are Jun
             if (collision.gameObject.name == Jun.name)
@@ -112,6 +117,9 @@ public class Dog : AnimatorCoder
         rb.velocity = new Vector2(0, 0);
         yield return new WaitForSeconds(.5f);
 
+        //determine hit
+        if (biteConnected) Jun.GetComponent<JunMoves>().EscalateAtk();
+
         //dog returns to Jun's side
         sr.flipX = !sr.flipX;
         rb.velocity = new Vector2(isP2 ? 5 : -5, 0);
@@ -119,8 +127,5 @@ public class Dog : AnimatorCoder
         else { while (gameObject.transform.localPosition.x < startCoords.x) { yield return new WaitForEndOfFrame(); } }
         rb.velocity = new Vector2(0, 0);
         sr.flipX = !sr.flipX;
-
-        //determine hit
-        
     }
 }
