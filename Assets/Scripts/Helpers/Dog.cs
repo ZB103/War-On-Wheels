@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using SHG.AnimatorCoder;
+using UnityEngine;
+using static UnityEngine.GridBrushBase;
 
 public class Dog : AnimatorCoder
 {
@@ -40,6 +41,7 @@ public class Dog : AnimatorCoder
     void Update()
     {
         CheckJump();
+        DefaultAnimation(0);
 
         void CheckJump()
         {
@@ -53,11 +55,19 @@ public class Dog : AnimatorCoder
         StartCoroutine(DogJump());
     }
 
+    //basic logic for animations
     public override void DefaultAnimation(int layer)
     {
-        //if Jun moves, the dog moves too
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A)) { Play(new(Animations.Dog_Run, false, new())); }
-        else { Play(new(Animations.Dog_Idle, false, new())); }
+        //forward
+        if ((!isP2 && Input.GetKey(KeyCode.D)) || rb.velocity.x != 0) { Play(new(Animations.Dog_Run)); }
+        else if (isP2 && Input.GetKey(KeyCode.LeftArrow)) { Play(new(Animations.Dog_Run)); }
+
+        //backward
+        else if (!isP2 && Input.GetKey(KeyCode.A)) { Play(new(Animations.Dog_Run)); }
+        else if (isP2 && Input.GetKey(KeyCode.RightArrow)) { Play(new(Animations.Dog_Run)); }
+
+        //idle
+        else { Play(new(Animations.Dog_Idle)); }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -100,11 +110,13 @@ public class Dog : AnimatorCoder
         Vector2 startCoords = gameObject.transform.localPosition;
 
         //dog runs
+        Play(new(Animations.Dog_Run));
         rb.velocity = new Vector2(isP2 ? -5 : 5, 0);
         yield return new WaitForSeconds(.5f);
 
         //dog jumps
         biteConnected = false;
+        Play(new(Animations.Dog_Jump, true, new(Animations.Dog_Idle)));
         rb.velocity = new Vector2(isP2 ? -5:5, 15);
         yield return new WaitForSeconds(.1f);
         do
@@ -122,6 +134,7 @@ public class Dog : AnimatorCoder
 
         //dog returns to Jun's side
         sr.flipX = !sr.flipX;
+        Play(new(Animations.Dog_Run, true, new()));
         rb.velocity = new Vector2(isP2 ? 5 : -5, 0);
         if (!isP2) {while (gameObject.transform.localPosition.x > startCoords.x) { yield return new WaitForEndOfFrame(); } }
         else { while (gameObject.transform.localPosition.x < startCoords.x) { yield return new WaitForEndOfFrame(); } }
