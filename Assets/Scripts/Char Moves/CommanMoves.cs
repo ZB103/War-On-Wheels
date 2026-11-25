@@ -6,6 +6,7 @@ public class CommanMoves : Moves
 {
     private GameObject[][] bolts = new GameObject[2][];
     public GameObject projectilePrefab;
+    public GameObject lightningPrefab;
 
     private void Start()
     {
@@ -36,13 +37,15 @@ public class CommanMoves : Moves
         if (gameObject.GetComponent<PlayerAnims>().lockInput) return;
 
         //spawning in bolts
-        StartCoroutine(throwBolts());
+        StartCoroutine(ThrowBolts());
     }
 
     protected override void SpcAttack()
     {
         //if character is attacking or defending animation, return
         if (gameObject.GetComponent<PlayerAnims>().lockInput) return;
+
+        StartCoroutine(OverheadStrike());
     }
 
     protected override void DefMove()
@@ -51,7 +54,7 @@ public class CommanMoves : Moves
         if (gameObject.GetComponent<PlayerAnims>().lockInput) return;
     }
 
-    IEnumerator throwBolts()
+    IEnumerator ThrowBolts()
     {
         yield return new WaitForSeconds(.15f);
 
@@ -72,6 +75,24 @@ public class CommanMoves : Moves
                 bolts[i][1].GetComponentInChildren<Projectile>().dam = 2;
                 yield return new WaitForSeconds(.1f);
             }
+        }
+    }
+
+    IEnumerator OverheadStrike()
+    {
+        yield return new WaitForSeconds(.3f);
+
+        //only shoot if the special attack animation is playing
+        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Spc_Attack"))
+        {
+            GameObject strike = Instantiate(lightningPrefab,
+                new Vector2(isP2? gameObject.transform.position.x-5 : gameObject.transform.position.x+5, 
+                gameObject.transform.position.y+1.5f), new Quaternion(0, 0, 0, 0));
+            strike.transform.localScale = new Vector2(2.5f, 2.5f);
+
+            //delete
+            yield return new WaitForSeconds(.5f);
+            Destroy(strike);
         }
     }
 }
